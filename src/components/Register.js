@@ -2,12 +2,19 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {saveUserAction} from '../store/actions/userActions';
 import Navbar from'./Navbar';
+import Login from './Login';
+import { ClipLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 
-
-function Register(){
+function Register(props){
     
+    const [ loading,updateLoading]=useState(false); 
+    const [ afterSave,updateAfterSave]=useState(false);
     const dispatch=useDispatch();
-    const user=useSelector(state=>state.user.user);
+    const user=useSelector(state=>state.user);
+    const error=useSelector(state=>state.user.error);
+    const [messageHandler,updateHandler]=useState({});
+    //const loading=useSelector(state=>state.user.loading);
     const [name,updateName] =useState('');
     const [surname,updateSurname] =useState('');
     const [email,updateEmail] =useState('');
@@ -15,32 +22,102 @@ function Register(){
     const [passwordConfirmation,updatePasswordConfirmation] =useState('');
     const saveUser=(newUser) =>dispatch(saveUserAction(newUser));
 
-    useEffect(()=>{
-    },[])
+    // useEffect(()=>{
+    //     if (error===true){
+           
+    //         updateAfterSave(true);
+    //     }
+    // },[error])
 
+    const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+    `;
+
+    const wait=async(ms)=> {
+        return new Promise(resolve => {
+        setTimeout(resolve, ms);
+        });
+    }
+    
+    const saveNew=async(userData)=>{
+        try {       
+            
+            updateLoading(true);
+            saveUser(userData);
+            await wait(1000);
+            updateLoading(false);
+            updateAfterSave(true);
+            await wait(1000);
+            updateLoading(false);
+         //   if (error===false){
+         //   await wait(2000);
+       //     updateAfterSave(false);
+//            props.history.push("/login");
+          //  }
+            // else{
+
+            // }
+        }
+       
+    
+        catch (error) {
+            console.log(error);
+        }
+    
+    }  
+//  console.log(error+' '+afterSave);
+// console.log(afterSaveMessage);
     return(
         <Fragment>
             <Navbar></Navbar>
             <div className="container">
                 <form
                     onSubmit={e=> {
-                                
                             e.preventDefault();
-                            //  updateLoading(true);
-                            
+                              updateLoading(true);
+                              updateAfterSave(false);
                             const user={name:name,
                                         surname:surname,
                                         email:email,
                                         password:password
                                         };
-                            saveUser(user);
-                
-                    
-                        }   
-                    } 
+                                                                    
+                            saveNew(user);
+
+
+                        } 
+                     }
                 >
                     <fieldset>
                         <h1>Register</h1>
+                        {loading===true  ? 
+                                    <h3 >Saving...</h3>
+                                    :
+                                    ''
+                                }
+                                <div className='sweet-loading'>
+                                    <ClipLoader
+                                    css={override}
+                                    sizeUnit={"px"}
+                                    size={150}
+                                    color={'#123abc'}
+                                    loading={loading}
+                                    />
+                                   
+                                </div>    
+                                   
+                                    { afterSave===true ?         
+                                                                                   
+                                        <div className= {error===true? "alert alert-dismissible alert-danger":"alert alert-dismissible alert-success"}  >
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{error===true ? 'Error: please check your information and try again!':'You have been registered succefully!'}  </strong>                                         
+                                        </div>
+                                        :''
+                                    }                                     
+                                        
+                                                                
                         <div className="form-group row">
                             {/* <label for="exampleInputEmail1">Email address</label> */}
                             <input type="text"
@@ -83,12 +160,15 @@ function Register(){
                                 value={passwordConfirmation}
                                 required/>
                         </div>
+                    
+                       
                     </fieldset>
                     <div className="col text-center">
                     <button type="submit" class="btn btn-primary btn-lg">     Submit    </button>
                     </div>
                 </form>   
             </div> 
+
         </Fragment>
     )
 }
