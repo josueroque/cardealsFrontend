@@ -1,0 +1,133 @@
+
+/* 
+img{
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+    margin-top: 2vh;
+    height: 18vh;
+    width: 25vw;
+
+} */
+.button{
+ 
+}
+.container{
+  width: 25% !important;
+  background-color: white !important;
+}
+.nav-link{
+    font-size: 1em;
+}
+h1{
+    margin-top: 5vh !important; 
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+h3{
+     
+    text-align: center;
+}
+h3{
+     
+    text-align: center;
+}
+h4{
+     
+    text-align: center;
+}
+
+.logo{
+    width: 5vw;
+    height: 5vw;
+}
+
+.row.filter{
+    margin-left: 2vw;
+    margin-top: 2vw;
+}
+
+.table{
+    margin-left: 2vw;
+    margin-right: 2vw;
+    width: 96vw !important;
+}
+
+/* Login form */
+body {font-family: Arial, Helvetica, sans-serif;}
+form.login {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button.login {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #fa1b0b;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 16px 0 8px 0;
+}
+
+img.avatar {
+  width: 15%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+  background-color:#f1f1f1
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+
+/* @media (max-width:480px) {
+    img{
+        margin-left: 1.5vw;
+        margin-right: 1.5vw;
+        margin-top: 2vh;
+        height: 36vh;
+        width: 75vw;
+        
+    
+    }
+} */
