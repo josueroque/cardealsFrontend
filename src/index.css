@@ -12,9 +12,16 @@ img{
  
 }
 .container{
-  width: 25% !important;
+  width: 50% !important;
+  background-color: white !important;
+  padding: 16px;
+}
+
+.container{
+  width: 50% !important;
   background-color: white !important;
 }
+
 .nav-link{
     font-size: 1em;
 }
@@ -25,6 +32,11 @@ h1{
 
 h2{
     text-align: center;
+}
+
+h2.login{
+ margin-top: 4vw;
+  text-align: center;
 }
 
 h3{
@@ -61,19 +73,16 @@ body {font-family: Arial, Helvetica, sans-serif;}
 form.login {border: 3px solid #f1f1f1;}
 
 input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
+
   margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+
 }
 
 button.login {
   background-color: #4CAF50;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  
+  margin-top: 5vw;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -99,10 +108,7 @@ img.avatar {
   border-radius: 50%;
 }
 
-.container {
-  padding: 16px;
-  background-color:#f1f1f1
-}
+
 
 span.psw {
   float: right;
@@ -110,24 +116,29 @@ span.psw {
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
+
+@media screen and (max-width: 960px) {
   span.psw {
      display: block;
      float: none;
   }
-  .cancelbtn {
-     width: 100%;
+  
+  .container{
+    width: 75% !important;
+    background-color: white !important;
   }
 }
 
-/* @media (max-width:480px) {
-    img{
-        margin-left: 1.5vw;
-        margin-right: 1.5vw;
-        margin-top: 2vh;
-        height: 36vh;
-        width: 75vw;
-        
-    
-    }
-} */
+
+@media screen and (max-width: 480px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+
+  .container{
+    width: 95% !important;
+    background-color: white !important;
+  }
+}
+

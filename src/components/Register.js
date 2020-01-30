@@ -14,7 +14,6 @@ function Register(props){
     const user=useSelector(state=>state.user);
     const error=useSelector(state=>state.user.error);
     const [messageHandler,updateHandler]=useState({});
-    //const loading=useSelector(state=>state.user.loading);
     const [name,updateName] =useState('');
     const [surname,updateSurname] =useState('');
     const [email,updateEmail] =useState('');
@@ -51,14 +50,11 @@ function Register(props){
             updateAfterSave(true);
             await wait(1000);
             updateLoading(false);
-         //   if (error===false){
-         //   await wait(2000);
-       //     updateAfterSave(false);
-//            props.history.push("/login");
-          //  }
-            // else{
+  
+            // await wait(2000);
+            // updateAfterSave(false);
+            // props.history.push("/login");
 
-            // }
         }
        
     
@@ -67,8 +63,7 @@ function Register(props){
         }
     
     }  
-//  console.log(error+' '+afterSave);
-// console.log(afterSaveMessage);
+
     return(
         <Fragment>
             <Navbar></Navbar>
@@ -76,6 +71,7 @@ function Register(props){
                 <form
                     onSubmit={e=> {
                             e.preventDefault();
+                            if (password===passwordConfirmation){    
                               updateLoading(true);
                               updateAfterSave(false);
                             const user={name:name,
@@ -83,8 +79,9 @@ function Register(props){
                                         email:email,
                                         password:password
                                         };
-                                                                    
-                            saveNew(user);
+                                                                 
+                                saveNew(user);
+                            }
 
 
                         } 
@@ -160,7 +157,14 @@ function Register(props){
                                 value={passwordConfirmation}
                                 required/>
                         </div>
-                    
+                        { password!==passwordConfirmation && passwordConfirmation !=='' ?         
+                                                                                   
+                            <div className= "alert alert-dismissible alert-danger"  >
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong> The passwords doesn't match!  </strong>                                         
+                            </div>
+                            :''
+                         }                       
                        
                     </fieldset>
                     <div className="col text-center">
