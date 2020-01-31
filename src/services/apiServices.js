@@ -23,8 +23,8 @@ export async function saveUser(user){
      
   }
   catch(error){
-      console.error(error.response);
-      throw error;
+      console.log(error.response);
+      throw error.response;
   }
 }
 

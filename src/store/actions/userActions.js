@@ -21,8 +21,9 @@ export const startSaveUser = () => ({
     type: START_SAVE_USER
 });
 
-export const saveUserFailure = () => ({
-    type: SAVE_USER_FAILURE
+export const saveUserFailure = (error) => ({
+    type: SAVE_USER_FAILURE,
+    payload:error
 });
 
 
@@ -52,17 +53,17 @@ export const logoutUserSuccess=user=>({
 export  function  saveUserAction  (user) {
     return async (dispatch)=>{
          dispatch(startSaveUser());
-      //   console.log(user);
+         console.log(user);
 
          try {
              
             const response=await saveUser(user);
-
-            dispatch(saveUserSuccess(user));
+            console.log(response);
+            //dispatch(saveUserSuccess(user));
                
          } catch (error) {
-             console.log(error);
-             dispatch(saveUserFailure());
+             console.log(typeof(error.data.error));
+             dispatch(saveUserFailure(error.data.error));
          }
      }
  };

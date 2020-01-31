@@ -4,12 +4,20 @@ import {
     SAVE_USER_FAILURE,
     START_AUTH_USER,
     AUTH_USER_SUCCESS,
-    AUTH_USER_FAILURE
+    AUTH_USER_FAILURE,
+    LOGOUT_USER,
+    LOGOUT_USER_SUCCESS,
+    VERIFY_EMAIL_SUCCESS,
+    VERIFY_EMAIL_FAILURE,
+    START_VERIFY_EMAIL,
+    VERIFY_NICKNAME_SUCCESS,
+    VERIFY_NICKNAME_FAILURE,
+    START_VERIFY_NICKNAME
 } from '../types';
 
 import { REHYDRATE } from 'redux-persist';
 
-const initialState={user:{},loading:false,error:false};
+const initialState={user:{},loading:false,error:false,errorInfo:''};
 
 export default function (state=initialState,action){
     switch(action.type){
@@ -17,7 +25,8 @@ export default function (state=initialState,action){
             return{
                 ...state,
                 loading:true,
-                error:false
+                error:false,
+                errorInfo:''
             } 
         case SAVE_USER_SUCCESS:
             return{
@@ -32,6 +41,7 @@ export default function (state=initialState,action){
                 user:{},
                 loading:false,
                 error:true,
+                errorInfo:action.payload
             }    
             case START_AUTH_USER:
                 return{
@@ -52,10 +62,39 @@ export default function (state=initialState,action){
                     user:{},
                     loading:false,
                     error:true,
-                }   
-  
+                  
+                }
+            // case START_VERIFY_EMAIL:
+            //     return{
+            //         ...state,
+            //         loading:true,
+            //         error:false
+            //     } 
+            // case VERIFY_EMAIL_SUCCESS:
+            //     return{
+            //         ...state,
+            //         user:action.payload,
+            //         loading:false,
+            //         error:false,
+            //     }
+            // case AUTH_USER_FAILURE:
+            //     return{
+                    
+            //         user:{},
+            //         loading:false,
+            //         error:true,
+            //     }   
+
+            case LOGOUT_USER_SUCCESS:
+                return{
+                    ...state,
+                    user:action.payload,
+                    loading:false,
+                    error:false,
+                }  
     
             default:
-            return {...state};
+            //return {...state};
+            return state;
     }
 }

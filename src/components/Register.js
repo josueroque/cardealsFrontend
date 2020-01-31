@@ -10,9 +10,11 @@ function Register(props){
     
     const [ loading,updateLoading]=useState(false); 
     const [ afterSave,updateAfterSave]=useState(false);
+    const [internalError,updateInternalError]=useState('');
     const dispatch=useDispatch();
     const user=useSelector(state=>state.user);
     const error=useSelector(state=>state.user.error);
+    const errorInfo=useSelector(state=>state.user.errorInfo);
     const [messageHandler,updateHandler]=useState({});
     const [name,updateName] =useState('');
     const [nickname,updateNickname] =useState('');
@@ -21,12 +23,24 @@ function Register(props){
     const [passwordConfirmation,updatePasswordConfirmation] =useState('');
     const saveUser=(newUser) =>dispatch(saveUserAction(newUser));
 
-    // useEffect(()=>{
-    //     if (error===true){
-           
-    //         updateAfterSave(true);
-    //     }
-    // },[error])
+    useEffect(()=>{
+        if (error===true){
+            let err=errorInfo.substring(0,76);
+            console.log(err)
+           switch (err){
+            case 'E11000 duplicate key error collection: Cardeals.users index: nickname_1 dup ':
+                updateInternalError('Nickname already exists!')
+                break;
+            case 'E11000 duplicate key error collection: Cardeals.users index: email_1 dup key':
+                updateInternalError('Email already exists!')
+                break;
+
+            default:
+                break;    
+           }
+                console.log(internalError);    
+        }
+    },[errorInfo])
 
     const override = css`
     display: block;
@@ -109,7 +123,7 @@ function Register(props){
                                                                                    
                                         <div className= {error===true? "alert alert-dismissible alert-danger":"alert alert-dismissible alert-success"}  >
                                             <button type="button" className="close" data-dismiss="alert">&times;</button>
-                                            <strong>{error===true ? 'Error: please check your information and try again!':'You have been registered succefully!'}  </strong>                                         
+                                            <strong>{error===true ? internalError:'You have been registered succefully!'}  </strong>                                         
                                         </div>
                                         :''
                                     }                                     
