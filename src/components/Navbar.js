@@ -61,7 +61,7 @@ function Navbar(){
             </div>
             </nav>    
             {user.token ? 
-                <h3>Bienvenido {user.name} {user.surname} </h3>
+                <h3>Bienvenido {user.name} {user.nickname} </h3>
                 : ''
             }
  </Fragment>

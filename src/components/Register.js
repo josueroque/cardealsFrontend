@@ -15,7 +15,7 @@ function Register(props){
     const error=useSelector(state=>state.user.error);
     const [messageHandler,updateHandler]=useState({});
     const [name,updateName] =useState('');
-    const [surname,updateSurname] =useState('');
+    const [nickname,updateNickname] =useState('');
     const [email,updateEmail] =useState('');
     const [password,updatePassword] =useState('');
     const [passwordConfirmation,updatePasswordConfirmation] =useState('');
@@ -75,7 +75,7 @@ function Register(props){
                               updateLoading(true);
                               updateAfterSave(false);
                             const user={name:name,
-                                        surname:surname,
+                                        nickname:nickname,
                                         email:email,
                                         password:password
                                         };
@@ -126,10 +126,10 @@ function Register(props){
                                 required />
                             <input type="text"
                                  className="form-control"
-                                 id="surname" 
-                                 placeholder="Type your surname"
-                                 onChange={e=>updateSurname(e.target.value)}
-                                 value={surname}
+                                 id="nickname" 
+                                 placeholder="Type your nickname"
+                                 onChange={e=>updateNickname(e.target.value)}
+                                 value={nickname}
                                  required />
                             <input type="email"
                                 className="form-control"

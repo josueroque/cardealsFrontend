@@ -80,7 +80,7 @@ export  function  authUserAction  (user) {
             if (response.data.ok){
                 user.token=response.data.token;
                 user.name=response.data.name;
-                user.surname=response.data.surname;
+                user.nickname=response.data.nickname;
                 dispatch(authUserSuccess(user));
             }
             else {
