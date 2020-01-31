@@ -108,7 +108,7 @@ function Register(props){
                                     { afterSave===true ?         
                                                                                    
                                         <div className= {error===true? "alert alert-dismissible alert-danger":"alert alert-dismissible alert-success"}  >
-                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <button type="button" className="close" data-dismiss="alert">&times;</button>
                                             <strong>{error===true ? 'Error: please check your information and try again!':'You have been registered succefully!'}  </strong>                                         
                                         </div>
                                         :''
@@ -160,7 +160,7 @@ function Register(props){
                         { password!==passwordConfirmation && passwordConfirmation !=='' ?         
                                                                                    
                             <div className= "alert alert-dismissible alert-danger"  >
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <button type="button" className="close" data-dismiss="alert">&times;</button>
                             <strong> The passwords doesn't match!  </strong>                                         
                             </div>
                             :''
@@ -168,7 +168,7 @@ function Register(props){
                        
                     </fieldset>
                     <div className="col text-center">
-                    <button type="submit" class="btn btn-primary btn-lg">     Submit    </button>
+                    <button type="submit" className="btn btn-primary btn-lg">     Submit    </button>
                     </div>
                 </form>   
             </div> 

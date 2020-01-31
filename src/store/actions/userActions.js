@@ -30,7 +30,7 @@ export const authUserSuccess=user=>({
 });
 
 export const startAuthUser = () => ({
-    type: START_SAVE_USER
+    type: START_AUTH_USER
 });
 
 export const authUserFailure = () => ({

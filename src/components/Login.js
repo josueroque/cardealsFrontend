@@ -15,8 +15,10 @@ function Login(props){
     const authUser=(newUser) =>dispatch(authUserAction(newUser));
     
     useEffect(()=>{
-        if (user.token){
+        if (user.token && error===false){
+            
             props.history.push("/");
+            
         }
 
     },[user])
@@ -36,6 +38,7 @@ function Login(props){
                                     };
                                                              
                         const response=  authUser(loginUser);
+                   //     props.history.push("/");
 
                             console.log(response);
                         
@@ -73,11 +76,18 @@ function Login(props){
                 />
                     
                 <div className="col text-center">
-                    <button type="submit" class="btn btn-primary btn-lg login">     Log in Now    </button>
+                    <button type="submit" className="btn btn-primary btn-lg login">     Log in Now    </button>
                 </div>
-                    {/* <label>
-                    <input type="checkbox" checked="checked" name="remember" /> Remember me
-                    </label> */}
+                <br />
+                    { error===true ?         
+                                                                                 
+                        <div className= "alert alert-dismissible alert-danger"  >
+                         
+                            <button type="button" className="close" data-dismiss="alert">&times;</button>
+                            <strong> Invalid user or password!  </strong>                                         
+                            </div>
+                        :''
+                    }  
                 </div>
 
 

@@ -4,12 +4,16 @@ import {useDispatch,useSelector} from 'react-redux';
 import Login from './Login';
 
 function Navbar(){
+
+    const user=useSelector(state=>state.user.user);
     return(
         <Fragment>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <Link to={ {pathname: `/`}} > 
-                <a className ="navbar-brand" href="">CarDeals</a>
+        
+            <Link to={ {pathname: `/`}} className ="navbar-brand" > 
+                  Cardeals
             </Link>
+                 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -17,19 +21,32 @@ function Navbar(){
             <div className="collapse navbar-collapse" id="navbarColor01">
                 <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                <Link to={ {pathname: `/login`}} > 
-                    <a className="nav-link" href="">Sign in<span className="sr-only">(current)</span></a>
-                </Link>  
+                
+                    <div>
+                    <Link to={ {pathname: `/login`}} className="nav-link" >     
+                    {!user.token ?    
+                        'Sign in'
+                    :
+                       'Sing out'
+                
+                    } 
+                    <span className="sr-only">(current)</span>
+                    </Link> 
+                    </div>
+                
+                </li>
+
+                <li className="nav-item">
+    
+                   
+                    <Link to={ {pathname: `/Register`}}  className="nav-link"> Register </Link>  
+                    
+                
+                
                 </li>
                 <li className="nav-item">
-                <Link to={ {pathname: `/Register`}} > 
-                    <a className="nav-link" href="">Register</a>
-                </Link>    
-                </li>
-                <li className="nav-item">
-                <Link to={ {pathname: `/Register`}} > 
+                
                     <a className="nav-link" href="">Search</a>
-                </Link>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="#">About</a>
@@ -41,6 +58,10 @@ function Navbar(){
                 </form> */}
             </div>
             </nav>    
+            {user.token ? 
+                <h3>Bienvenido {user.name} {user.surname} </h3>
+                : ''
+            }
  </Fragment>
     )
 }
