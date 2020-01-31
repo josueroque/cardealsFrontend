@@ -1,11 +1,15 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
-import Login from './Login';
+import {logoutUserAction} from '../store/actions/userActions';
 
 function Navbar(){
-
+    const dispatch=useDispatch(); 
     const user=useSelector(state=>state.user.user);
+    const logOut=(userRedux) =>dispatch(logoutUserAction(userRedux));
+
+     
+    
     return(
         <Fragment>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -23,7 +27,7 @@ function Navbar(){
                 <li className="nav-item active">
                 
                     <div>
-                    <Link to={ {pathname: `/login`}} className="nav-link" >     
+                    <Link to={ {pathname: `/login`}} className="nav-link"  onClick={user.token ? ()=>logOut(user) :()=>{}}  >     
                     {!user.token ?    
                         'Sign in'
                     :

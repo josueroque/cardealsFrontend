@@ -4,7 +4,9 @@ import {
     SAVE_USER_FAILURE,
     START_AUTH_USER,
     AUTH_USER_SUCCESS,
-    AUTH_USER_FAILURE
+    AUTH_USER_FAILURE,
+    LOGOUT_USER,
+    LOGOUT_USER_SUCCESS
 } from '../types';
 
 import {saveUser,loginUser} from '../../services/apiServices';
@@ -37,6 +39,15 @@ export const authUserFailure = () => ({
     type: AUTH_USER_FAILURE
 });
 
+
+export const logoutUser = () => ({
+    type: LOGOUT_USER
+});
+
+export const logoutUserSuccess=user=>({
+    type:LOGOUT_USER_SUCCESS,
+    payload:user
+});
 
 export  function  saveUserAction  (user) {
     return async (dispatch)=>{
@@ -79,6 +90,21 @@ export  function  authUserAction  (user) {
          } catch (error) {
              console.log(error);
              dispatch(authUserFailure());
+         }
+     }
+ };
+
+ export  function  logoutUserAction  (user) {
+    return async (dispatch)=>{
+         try {
+             
+                user.token=null;
+                console.log(user);
+                dispatch(logoutUserSuccess(user));
+               
+         } catch (error) {
+             console.log(error);
+//             dispatch(authUserFailure());
          }
      }
  };
