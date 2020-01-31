@@ -7,6 +7,8 @@ import {
     AUTH_USER_FAILURE
 } from '../types';
 
+import { REHYDRATE } from 'redux-persist';
+
 const initialState={user:{},loading:false,error:false};
 
 export default function (state=initialState,action){
@@ -51,8 +53,9 @@ export default function (state=initialState,action){
                     loading:false,
                     error:true,
                 }   
+  
     
             default:
-            return state;
+            return {...state};
     }
 }

@@ -8,8 +8,6 @@ function Navbar(){
     const user=useSelector(state=>state.user.user);
     const logOut=(userRedux) =>dispatch(logoutUserAction(userRedux));
 
-     
-    
     return(
         <Fragment>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
