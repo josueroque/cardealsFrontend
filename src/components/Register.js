@@ -24,9 +24,9 @@ function Register(props){
     const saveUser=(newUser) =>dispatch(saveUserAction(newUser));
 
     useEffect(()=>{
-        if (error===true){
+        if (error===true && errorInfo){
             let err=errorInfo.substring(0,76);
-            console.log(err)
+            console.log(err) 
            switch (err){
             case 'E11000 duplicate key error collection: Cardeals.users index: nickname_1 dup ':
                 updateInternalError('Nickname already exists!')
@@ -36,6 +36,7 @@ function Register(props){
                 break;
 
             default:
+                updateInternalError('An error has ocurred if it persists please contact technical support');
                 break;    
            }
                 console.log(internalError);    

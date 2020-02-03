@@ -7,6 +7,7 @@ function Login(props){
 
     const dispatch=useDispatch();
     const user=useSelector(state=>state.user.user);
+    const errorInfo=useSelector(state=>state.user.errorInfo);
     const error=useSelector(state=>state.user.error);
     const [email,updateEmail] =useState('');
     const [password,updatePassword] =useState('');
@@ -77,12 +78,12 @@ function Login(props){
                     <button type="submit" className="btn btn-primary btn-lg login">     Log in Now    </button>
                 </div>
                 <br />
-                    { error===true ?         
+                    { error===true && email && password ?         
                                                                                  
                         <div className= "alert alert-dismissible alert-danger"  >
                          
                             <button type="button" className="close" data-dismiss="alert">&times;</button>
-                            <strong> Invalid user or password!  </strong>                                         
+                            <strong> Invalid user or password! </strong>                                         
                             </div>
                         :''
                     }  
