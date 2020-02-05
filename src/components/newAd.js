@@ -2,7 +2,7 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {authUserAction} from '../store/actions/userActions';
 import Navbar from './Navbar';
-function Home(props){
+function newAd(props){
     const dispatch=useDispatch();
     const user=useSelector(state=>state.user.user);
     const error=useSelector(state=>state.user.error);
@@ -12,7 +12,8 @@ function Home(props){
     return(
         <Navbar></Navbar>
         
+
     )
 }
 
-export default Home;
+export default newAd;
