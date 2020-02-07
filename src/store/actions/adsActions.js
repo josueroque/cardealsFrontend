@@ -21,14 +21,14 @@ export const saveAdFailure = (error) => ({
     payload:error
 });
 
-export  function  saveAdAction  (ad,token) {
+export  function  saveAdAction  (ad,token,files) {
     return async (dispatch)=>{
          dispatch(startSaveAd());
          console.log(ad);
 
          try {
              
-            const response=await saveAd(ad,token);
+            const response=await saveAd(ad,token,files);
             console.log(response);
             dispatch(saveAdSuccess(ad));
                

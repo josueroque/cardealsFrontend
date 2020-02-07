@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
- function MultipleImageUpload(props) {
+export default class MultipleImageUploadComponent extends Component {
 
     fileObj = [];
     fileArray = [];
@@ -32,17 +32,15 @@ import React, { Component } from 'react';
             <form>
                 <div className="form-group multi-preview">
                     {(this.fileArray || []).map(url => (
-                        <img className="img-preview" src={url} alt="..." />
+                        <img src={url} alt="..." />
                     ))}
                 </div>
 
                 <div className="form-group">
                     <input type="file" className="form-control" onChange={this.uploadMultipleFiles} multiple />
                 </div>
-                {/* <button type="button" className="btn btn-danger btn-block" onClick={this.uploadFiles}>Upload</button> */}
+                <button type="button" className="btn btn-danger btn-block" onClick={this.uploadFiles}>Upload</button>
             </form >
         )
     }
 }
-
-export default MultipleImageUpload

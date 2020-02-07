@@ -49,7 +49,7 @@ export  function  getMakesAction  () {
          try {
              
             const response=await getMakes();
-            console.log(response);
+          //  console.log(response);
             dispatch(getMakesSuccess(response.data.results));
                
          } catch (error) {

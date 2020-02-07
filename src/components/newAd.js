@@ -6,7 +6,8 @@ import MultipleImageUpload from './MultipleImageUpload';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { saveAdAction } from '../store/actions/adsActions';
-
+let fileObj = [];
+let fileArray = [];
 function NewAd(props){
     const user =useSelector(state=>state.user.user);
     const makes=useSelector(state=>state.cars.makes);
@@ -21,12 +22,13 @@ function NewAd(props){
     const [description,updateDescription]=useState('');
     const [transmition,updateTransmition]=useState('');
     const [photo,updatePhoto]=useState('');
+    const [file,updateFile]=useState( [null]);
     const [ loading,updateLoading]=useState(false); 
     const [ afterSave,updateAfterSave]=useState(false);
     const dispatch=useDispatch();
     const getMakes=() =>dispatch(getMakesAction());
     const getModels=(make) =>dispatch(getModelsAction(make));
-    const saveAd=(ad,token) =>dispatch(saveAdAction(ad,token));
+    const saveAd=(ad,token,files) =>dispatch(saveAdAction(ad,token,files));
    
     useEffect(()=>{
         getMakes();
@@ -40,13 +42,24 @@ function NewAd(props){
     for (let i=1920;i<2020;i++){
         years.push(i);
     }
+    
 
+    
     const override = css`
     display: block;
     margin: 0 auto;
     border-color: red;
     `;
-
+    
+   const uploadMultipleFiles=(e)=> {
+ //  console.log(e.target);
+        fileObj.push(e.target.files);
+        for (let i = 0; i < fileObj[0].length; i++) {
+            fileArray.push(URL.createObjectURL(fileObj[0][i]));
+        }
+        updateFile(fileArray );
+    }
+    
     const wait=async(ms)=> {
         return new Promise(resolve => {
         setTimeout(resolve, ms);
@@ -57,8 +70,8 @@ function NewAd(props){
         // try {       
             
             updateLoading(true);
-
-            saveAd(advert,user.token);
+            console.log(fileObj);
+            saveAd(advert,user.token,fileObj);
             await wait(1000);
             updateLoading(false);
             updateAfterSave(true);
@@ -74,9 +87,8 @@ function NewAd(props){
         // }
     
     }  
-console.log(afterSave);
-console.log(photo);
 
+    //console.log(fileObj);
 
     return(
        <Fragment>
@@ -104,7 +116,12 @@ console.log(photo);
         <form
         onSubmit={e=> {
                       e.preventDefault();
+                      console.log(file);                      
                       updateLoading(true);
+                    //   fileObj.map(file=>
+                    //     updatePhoto(...photo, file.name)
+                    //   );
+                     
                       let createdAd={
                         make,
                         model,
@@ -115,10 +132,34 @@ console.log(photo);
                         price:{currency,amount},
                         country:'Honduras',
                         city:'Tergucigalpa',
-                        photo
+                        photo:photo
 
                         }
-                      saveNew(createdAd);
+                      let Ad=new FormData();
+                      //Ad=createdAd;
+                      console.log(file);
+                   //   Ad.append('photo',file);
+//                      Ad.append('photo[1]',file[1]);
+                      console.log(file[0]);      
+                      console.log(fileObj[0].length);      
+
+
+                      for(let i=0 ;i<fileObj[0].length;i++){
+                        Ad.append('photos',fileObj[0][i]);
+
+                      }
+                      Ad.append('photo',[]);
+                      Ad.append('make',createdAd.make);
+                      Ad.append('model',createdAd.model);
+                      Ad.append('description',createdAd.description);
+                      Ad.append('year',createdAd.year);    
+                      Ad.append('type',createdAd.type);
+                      Ad.append('transmition',createdAd.transmition);
+                      Ad.append('price',createdAd.price);
+                      Ad.append('country',createdAd.country);
+                      Ad.append('city',createdAd.city)
+                      Ad.append('user',user.name)
+                      saveNew(Ad);
                   
                      }
                     }
@@ -224,7 +265,16 @@ console.log(photo);
             {/* <input type="file" multiple value={afterSave===false? photo:''} accept="image/*" onChange={e=>updatePhoto(e.target.value)} className="form-control-file" id="photo" aria-describedby="fileHelp"></input>
             <small id="fileHelp" className="form-text text-muted">Select a photo</small> */}
             
-            <MultipleImageUpload></MultipleImageUpload>
+            <div className="form-group multi-preview">
+                    {(fileArray || []).map(url => (
+                        <img className="img-preview" key={url} src={url} alt="..." />
+                    ))}
+            </div>
+
+            <div className="form-group">
+                    <input type="file"  accept="image/*" className="form-control" onChange={uploadMultipleFiles} multiple />
+            </div>
+            
             <input type="submit" className="btn btn-primary btn-lg btn-block btn-Ad" value="Save"/> 
                                    
             </div>   

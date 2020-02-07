@@ -8,7 +8,6 @@ export async function saveUser(user){
       const config = {}
 
    const response = await axios.post(requestUrl, user );
-      console.log(response);
       if (response.statusText!=="OK") {
         throw new Error('Error saving user');
       }
@@ -26,13 +25,6 @@ export async function loginUser(user){
   try {
     
      const requestUrl =URL +'/authenticate';
-    //  const config = {
-    //    headers: { 'Authorization': `Bearer ${token}` }
-    //   };
-     console.log(requestUrl);
-     console.log(user);
-
-
 
   const response = await axios.post(requestUrl, user);
      console.log(response);
@@ -55,7 +47,6 @@ export async function getMakes(){
       const requestUrl =URL +'/makes';
   
    const response = await axios.get(requestUrl);
-      console.log(response);
       if (response.statusText!=="OK") {
         throw new Error('Error getting makes');
       }
@@ -73,9 +64,7 @@ export async function getMakes(){
    try {
      
       const requestUrl =URL +'/makes/models?make='+make;
-  console.log(requestUrl);
    const response = await axios.get(requestUrl);
-   console.log(response);   
    if (response.statusText!=="OK") {
         throw new Error('Error getting models');
       }
@@ -90,15 +79,24 @@ export async function getMakes(){
  }
 
  
- export const  saveAd= async (ad,token) =>{
+ export const  saveAd= async (ad,token,files) =>{
   try {
     const requestUrl =URL +'/adverts';
-    console.log('desde api Save ');
+    // console.log('desde api Save ');
+    // console.log(ad);
+    //console.log(requestUrl);
+    console.log(files);
     console.log(ad);
-    console.log(requestUrl);
      const config = {
-       headers: { 'x-access-token': `${token}` }
-      };
+       headers: { 
+        
+        'x-access-token': `${token}`,
+                  'Content-Type':'multipart/form-data'},
+       //files:files           
+       };
+    //console.log(files);  
+
+    
     const response = await axios.post(requestUrl,ad,config);
     console.log(response);
     return response;   
