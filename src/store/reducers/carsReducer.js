@@ -9,7 +9,7 @@ import {
 
 import { REHYDRATE } from 'redux-persist';
 
-const initialState={loading:false,error:false,errorInfo:''};
+const initialState={makes:[],models:[],loading:false,error:false,errorInfo:''};
 
 export default function (state=initialState,action){
     switch(action.type){
@@ -18,7 +18,8 @@ export default function (state=initialState,action){
                 ...state,
                 loading:true,
                 error:false,
-                errorInfo:''
+                errorInfo:'',
+                makes:[]
             } 
         case GET_MAKES_SUCCESS:
             return{
@@ -39,7 +40,8 @@ export default function (state=initialState,action){
                 return{
                     ...state,
                     loading:true,
-                    error:false
+                    error:false,
+                    models:[]
                 } 
             case GET_MODELS_SUCCESS:
                 return{

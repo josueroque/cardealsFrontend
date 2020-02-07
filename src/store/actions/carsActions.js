@@ -7,103 +7,73 @@ import {
     GET_MODELS_FAILURE,
 } from '../types';
 
-import {saveUser,loginUser} from '../../services/apiServices';
+import {getMakes,getModels} from '../../services/apiServices';
 
 
-export const saveUserSuccess=user=>({
-    type:SAVE_USER_SUCCESS,
-    payload:user
+export const getMakesSuccess=makes=>({
+    type:GET_MAKES_SUCCESS,
+    payload:makes
 });
 
-export const startSaveUser = () => ({
-    type: START_SAVE_USER
+export const startGetMakes = () => ({
+    type: START_GET_MAKES
 });
 
-export const saveUserFailure = (error) => ({
-    type: SAVE_USER_FAILURE,
+export const getMakesFailure = (error) => ({
+    type: GET_MAKES_FAILURE,
     payload:error
 });
 
 
-export const authUserSuccess=user=>({
-    type:AUTH_USER_SUCCESS,
-    payload:user
+export const getModelsSuccess=models=>({
+    type:GET_MODELS_SUCCESS,
+    payload:models
 });
 
-export const startAuthUser = () => ({
-    type: START_AUTH_USER
+export const startGetModels = () => ({
+    type: START_GET_MODELS
 });
 
-export const authUserFailure = () => ({
-    type: AUTH_USER_FAILURE
+export const getModelsFailure = (error) => ({
+    type: GET_MODELS_FAILURE,
+    payload:error
 });
 
 
-export const logoutUser = () => ({
-    type: LOGOUT_USER
-});
 
-export const logoutUserSuccess=user=>({
-    type:LOGOUT_USER_SUCCESS,
-    payload:user
-});
 
-export  function  saveUserAction  (user) {
+export  function  getMakesAction  () {
     return async (dispatch)=>{
-         dispatch(startSaveUser());
-         console.log(user);
+         dispatch(startGetMakes());
 
          try {
              
-            const response=await saveUser(user);
+            const response=await getMakes();
             console.log(response);
-            //dispatch(saveUserSuccess(user));
+            dispatch(getMakesSuccess(response.data.results));
                
          } catch (error) {
-             console.log(typeof(error.data.error));
-             dispatch(saveUserFailure(error.data.error));
+             dispatch(getMakesFailure(error.data.error));
          }
      }
  };
 
-export  function  authUserAction  (user) {
+export  function  getModelsAction  (make) {
     return async (dispatch)=>{
-         dispatch(startAuthUser());
+         dispatch(startGetModels());
       //   console.log(user);
 
          try {
              
-            const response=await loginUser(user);
-            console.log(response);
-
-            if (response.data.ok){
-                user.token=response.data.token;
-                user.name=response.data.name;
-                user.nickname=response.data.nickname;
-                dispatch(authUserSuccess(user));
-            }
-            else {
-                dispatch(authUserFailure());
-            }
-               
+            const models=await getModels(make);
+            
+            dispatch(getModelsSuccess(models.data.results));
+            
+            
          } catch (error) {
              console.log(error);
-             dispatch(authUserFailure());
+             dispatch(getModelsFailure(error));
          }
      }
  };
 
- export  function  logoutUserAction  (user) {
-    return async (dispatch)=>{
-         try {
-             
-                user.token=null;
-                console.log(user);
-                dispatch(logoutUserSuccess(user));
-               
-         } catch (error) {
-             console.log(error);
-//             dispatch(authUserFailure());
-         }
-     }
- };
