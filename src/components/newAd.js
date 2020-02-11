@@ -317,9 +317,9 @@ function NewAd(props){
             </div>
             
             {afterSave===true ?
-                <div className= {error===true? "alert alert-dismissible alert-danger":"alert alert-dismissible alert-success"}  >
-                    <button type="button" className="close" data-dismiss="success">&times;</button>
-                    <strong>Ad saved succefully! </strong>                                         
+                <div   >
+                    <Alert severity={error===true?'warning':'success'}>{error===true ? 'An error occured, please check your data':'Advert saved succefully!'}</Alert>
+
                 </div>            
             :
             <Grid container justify="center">

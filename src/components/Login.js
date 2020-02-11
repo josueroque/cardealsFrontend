@@ -1,7 +1,31 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {authUserAction} from '../store/actions/userActions';
+import { Container } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+import { FormGroup } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import MuiAlert from '@material-ui/lab/Alert';
 import SideBar from'./SideBar';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  
+  const useStyles = makeStyles(theme => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2), 
+      },
+    },
+  }));
+
 
 function Login(props){
 
@@ -25,7 +49,8 @@ function Login(props){
     return(
         <Fragment>
             <SideBar></SideBar>
-            <h2 className="login">Login Form</h2>
+         
+            
 
             <form
                      onSubmit={e=> {
@@ -47,15 +72,12 @@ function Login(props){
                  }
             >
        
-            
-            <div className="imgcontainer">
-                <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" className="avatar" />
-            </div>
 
-            <div className="container container-login">
-             
-                <input type="email"
-                                className="form-control"
+
+            <Container className="loginContainer">
+                 <FormGroup>
+                 <h1 >Sign In</h1>
+                    <TextField type="email"
                                 id="email"
                                 aria-describedby="emailHelp"
                                 placeholder="Enter your email"
@@ -65,33 +87,30 @@ function Login(props){
                 />
 
 
-                <input type="password"
-                                className="form-control"
+                <TextField type="password"
                                 id="passwordConfirmation" 
                                 placeholder="Enter your Password"
                                 onChange={e=>updatePassword(e.target.value)}
                                 value={password}
                                 required
                 />
-                    
-                <div className="col text-center">
-                    <button type="submit" className="btn btn-primary btn-lg login">     Log in Now    </button>
-                </div>
+                </FormGroup>    
+                <Grid container justify="center">
+                    <Button className="centerButton" type="submit" variant="contained" color="primary">     Enter    </Button>
+                </Grid>
                 <br />
                     { error===true && email && password ?         
                                                                                  
                         <div className= "alert alert-dismissible alert-danger"  >
                          
-                            <button type="button" className="close" data-dismiss="alert">&times;</button>
-                            <strong> Invalid user or password! </strong>                                         
+                         <Alert severity="error">Invalid user or password!</Alert>                                       
                             </div>
                         :''
                     }  
-                </div>
-
+            </Container>
 
             </form>
-                
+        
         </Fragment>
         )
 };

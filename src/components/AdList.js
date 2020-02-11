@@ -1,7 +1,7 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
-import Navbar from './Navbar';
+import SideBar from './SideBar';
 import { Container } from '@material-ui/core';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
@@ -21,44 +21,9 @@ function AdList(){
        console.log(ads.length);
     return(
         <Fragment>
-        <Navbar></Navbar>
+        <SideBar></SideBar>
         <Container className="Container">
-        <h2>Created Adverts</h2>
-        <table className="table table-hover table-list">
-            <thead>
-                <tr className="table-primary">
-                <th scope="col">Type</th>
-                <th scope="col">Title</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            { ads.length>0 ?
-             ads.map(ad=> 
-              
-                <tr key={ad._id}>
-                    <td>{ad.sell===true ?'Sell':'Buy'}</td>
-                    <td>{ad.make+ad.model+ad.year}</td>
-                    <td>{ad.createdAt}</td>
-                    <td>
-                    <button type="button" className="btn btn-warning btn-table">Edit</button>
-                    <button type="button" className="btn btn-danger btn-table">Del</button>
-                    </td>
-                </tr> 
-            
-            )
-                           
-            :
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            }
-            </tbody>
-        </table> 
+            <h2>Created Adverts</h2>
         </Container>
         </Fragment>
     )
