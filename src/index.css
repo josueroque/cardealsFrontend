@@ -8,6 +8,11 @@ img{
     width: 25vw;
 
 } */
+.btn-table{
+  /* width:4vw; */
+  margin-left: 1vw;
+}
+
 .img-preview{
   width: 25%;
 }
@@ -34,6 +39,8 @@ img{
   width: 50% !important;
   background-color: white !important;
 }
+
+
 
 .container-Ad{
   width: 100% !important;
@@ -62,15 +69,12 @@ h2.login{
 
 h3{
      
-    text-align: center;
+    text-align: center ;
 }
-h3{
-     
-    text-align: center;
-}
-h4{
-     
-    text-align: center;
+
+h5{
+    margin-right: 2vw; 
+    text-align: right;
 }
 
 .logo{
@@ -135,6 +139,7 @@ span.psw {
   float: right;
   padding-top: 16px;
 }
+
 
 /* Change styles for span and cancel button on extra small screens */
 

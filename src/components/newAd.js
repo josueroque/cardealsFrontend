@@ -38,8 +38,12 @@ function NewAd(props){
         getModels(make);
     },[make])
 
+    useEffect(()=>{
+        updateFile(file );
+    },[file])
+
     let years=[];
-    for (let i=1920;i<2020;i++){
+    for (let i=2020;i>1920;i--){
         years.push(i);
     }
     
@@ -132,8 +136,8 @@ function NewAd(props){
                         price:{currency,amount},
                         country:'Honduras',
                         city:'Tergucigalpa',
-                        photo:photo
-
+                        photo:photo,
+                        user:user.email
                         }
                       let Ad=new FormData();
                       //Ad=createdAd;
@@ -158,7 +162,7 @@ function NewAd(props){
                       Ad.append('price',createdAd.price);
                       Ad.append('country',createdAd.country);
                       Ad.append('city',createdAd.city)
-                      Ad.append('user',user.name)
+                      Ad.append('user',user.email);
                       saveNew(Ad);
                   
                      }
@@ -246,8 +250,8 @@ function NewAd(props){
                             <option key="L" value="L"> L </option>
                 </select>
                 
-                <input className="form-control col-md-4 inputAmount"
-                      type="text" 
+                <input className="form-control col-md-4 inputAmount "
+                      type="number" 
                       placeholder="Amount" 
                       id="amount"
                       value={amount}
@@ -275,7 +279,15 @@ function NewAd(props){
                     <input type="file"  accept="image/*" className="form-control" onChange={uploadMultipleFiles} multiple />
             </div>
             
+            {afterSave===true ?
+                <div className= {error===true? "alert alert-dismissible alert-danger":"alert alert-dismissible alert-success"}  >
+                    <button type="button" className="close" data-dismiss="success">&times;</button>
+                    <strong>Ad saved succefully! </strong>                                         
+                </div>            
+            :
             <input type="submit" className="btn btn-primary btn-lg btn-block btn-Ad" value="Save"/> 
+
+            }
                                    
             </div>   
         </form>

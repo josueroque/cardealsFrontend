@@ -78,10 +78,28 @@ export async function getMakes(){
   }
  }
 
+ export async function getAdsUser(user){  
+  try {
+    
+     const requestUrl =URL +'/adverts?user='+user;
+    const response = await axios.get(requestUrl);
  
+    if (response.statusText!=="OK") {
+        throw new Error('Error getting adverts');
+      }
+      return response; 
+    }
+  
+    catch(error){
+     console.error(error.response);
+     throw error;
+ }
+}
+
+
  export const  saveAd= async (ad,token,files) =>{
   try {
-    const requestUrl =URL +'/adverts';
+    const requestUrl =URL +'/adverts/create';
     // console.log('desde api Save ');
     // console.log(ad);
     //console.log(requestUrl);
