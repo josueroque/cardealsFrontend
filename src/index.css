@@ -36,12 +36,30 @@ centerDiv{
   max-height: 0vw !important;
 }
 
+.currency{
+  width: 10vw !important;
+}
+
+.currencyGroup{
+display: flex;
+
+}
+.column{
+  flex:50%;
+}
+
+.amount{
+  width: 15vw !important;
+
+}
+
 .centerButton{
   margin-top: 2vw !important;
+  width: 10vw;
 }
 
 .Container{
-  margin-top: 10vw !important;
+  margin-top: 5vw !important;
   border-color: #f1f1f1 !important;
   width: 50% !important;
   border: 0px;

@@ -1,15 +1,44 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
-import Navbar from './Navbar';
-import { Container } from '@material-ui/core';
+import SideBar from './SideBar';
 import MultipleImageUpload from './MultipleImageUpload';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { saveAdAction } from '../store/actions/adsActions';
+import { Container } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+import { FormGroup } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import MuiAlert from '@material-ui/lab/Alert';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+
 let fileObj = [];
 let fileArray = [];
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  
+  const useStyles = makeStyles(theme => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2), 
+      },
+    },
+  }));
+
 function NewAd(props){
+    const classes = useStyles();
     const user =useSelector(state=>state.user.user);
     const makes=useSelector(state=>state.cars.makes);
     const models=useSelector(state=>state.cars.models);
@@ -96,7 +125,7 @@ function NewAd(props){
 
     return(
        <Fragment>
-        <Navbar></Navbar>            
+        <SideBar></SideBar>            
             {loading===true ?
                 <Fragment> 
                 <h3 >Guardando...</h3>
@@ -172,88 +201,91 @@ function NewAd(props){
         
         <h2 className="h2-Ad"> New Advert </h2>
 
-        <div className="row col-md-6 form-group form-group-Ad">
+        <FormGroup>
 
-                     
-                <select 
-                className="form-control"
+            <FormControl className={classes.formControl}> 
+            <InputLabel id="demo-simple-select-label">Make</InputLabel>       
+                <Select 
                 name="make"
                 onChange={e=>updateMake(e.target.value)}
                 value={make}
                  required
                 >
-                    <option key="default">---Select a make---</option>
+                    <MenuItem key="default">---Select a make---</MenuItem>
                 {makes ? makes.map( make=>
-                    <option key={make.name} value={make.name} >{make.name}</option>
+                    <MenuItem key={make.name} value={make.name} >{make.name}</MenuItem>
                 ):''}   
-                </select>
-   
-
-                <select className="form-control"
+                </Select>
+             </FormControl>       
+             <FormControl className={classes.formControl}> 
+             <InputLabel id="demo-simple-select-label">Model</InputLabel>              
+                <Select 
                 name="model"
                 onChange={e=>updateModel(e.target.value)}
                 value={model}
                  required
 
                 >
-                    <option key="default">---Select a model---</option>
+                    <MenuItem key="default">---Select a model---</MenuItem>
                 {models.length>0 ? models.map( model=>
-                    <option key={model.name} value={model.name} >{model.name}</option>
+                    <MenuItem key={model.name} value={model.name} >{model.name}</MenuItem>
                 ):''}   
-                </select>
-              
-                <select  className="form-control"
+                </Select>
+              </FormControl>
+              <FormControl>
+                  <InputLabel id="demo-simple-select-label">Model</InputLabel>              
+                    <Select  className="form-control"
                     
                     name="type"
                     onChange={e=>updateType(e.target.value)}
                     value={type}
                     required
                 >
-                    <option key={'default'} value="default" >---Select type of advert---</option>
-                    <option key={'Sell'} value="sell" >Sell</option>
-                    <option key={'Buy'} value="buy" >Buy</option>
-                </select>
-                    
-                <select  className="form-control"
+                    <MenuItem key={'default'} value="default" >---Select type of advert---</MenuItem>
+                    <MenuItem key={'Sell'} value="sell" >Sell</MenuItem>
+                    <MenuItem key={'Buy'} value="buy" >Buy</MenuItem>
+                </Select>
+                </FormControl>                    
+                <Select  className="form-control"
                     
                     name="year"
                     onChange={e=>updateYear(e.target.value)}
                     value={year}
                     required
                 >
-                    <option key={'default'} value="default" >---Select year---</option>
+                    <MenuItem key={'default'} value="default" >---Select year---</MenuItem>
                     {years.map(year=>
-                            <option key={year} value={year}>{year} </option>
+                            <MenuItem key={year} value={year}>{year} </MenuItem>
                         )
 
                     }
-                </select>    
+                </Select>    
                 
-                <select  className="form-control"
+                <Select  className="form-control"
                     
                     name="transmition"
                     onChange={e=>updateTransmition(e.target.value)}
                     value={transmition}
                     required
                 >
-                    <option key={'default'} value="default" >---Select type of transmition---</option>
-                    <option key={'Sell'} value="manual" >Manual</option>
-                    <option key={'Buy'} value="automatic" >Automatic</option>
-                </select>                    
-                
-                <select  className="form-control col-md-4 "
+                    <MenuItem key={'default'} value="default" >---Select type of transmition---</MenuItem>
+                    <MenuItem key={'Sell'} value="manual" >Manual</MenuItem>
+                    <MenuItem key={'Buy'} value="automatic" >Automatic</MenuItem>
+                </Select>                     
+                <div className="currencyGroup" >
+                <Select   className="currency column"
                     
                     name="currency"
                     onChange={e=>updateCurrency(e.target.value)}
                     value={currency}
                     required
                 >
-                    <option key={'default'} value="default" >---Select currency---</option>
-                            <option key="$" value="$"> $ </option>
-                            <option key="L" value="L"> L </option>
-                </select>
+                <MenuItem className="column" key={'default'} value="default" >---Select currency---</MenuItem>
+                            <MenuItem key="$" value="$"> $ </MenuItem>
+                            <MenuItem key="L" value="L"> L </MenuItem>
+                </Select>
                 
-                <input className="form-control col-md-4 inputAmount "
+                <TextField className="amount column"
                       type="number" 
                       placeholder="Amount" 
                       id="amount"
@@ -261,13 +293,15 @@ function NewAd(props){
                       onChange={e=>updateAmount(e.target.value)}
                       required
                 />
-
-                <textarea className="form-control "
+                </div>
+                <TextField className="form-control "
                       placeholder="Description" 
                       id="description"
                       value={description}
                       onChange={e=>updateDescription(e.target.value)}
                       required
+                      multiline
+                      rows="3"
                 />
             {/* <input type="file" multiple value={afterSave===false? photo:''} accept="image/*" onChange={e=>updatePhoto(e.target.value)} className="form-control-file" id="photo" aria-describedby="fileHelp"></input>
             <small id="fileHelp" className="form-text text-muted">Select a photo</small> */}
@@ -288,11 +322,13 @@ function NewAd(props){
                     <strong>Ad saved succefully! </strong>                                         
                 </div>            
             :
-            <input type="submit" className="btn btn-primary btn-lg btn-block btn-Ad" value="Save"/> 
+            <Grid container justify="center">
+            <Button className="centerButton" type="submit" variant="contained" color="primary">    Save   </Button>
+            </Grid>
 
             }
                                    
-            </div>   
+            </FormGroup>   
         </form>
         </Container>  
          </Fragment>
