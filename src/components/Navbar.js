@@ -2,6 +2,7 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import {logoutUserAction} from '../store/actions/userActions';
+//import {instance} from '../components/SideBar';
 
 function Navbar(){
     const dispatch=useDispatch(); 
@@ -10,6 +11,7 @@ function Navbar(){
 
     return(
         <Fragment>
+            <instance></instance>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         
             <Link to={ {pathname: `/`}} className ="navbar-brand" > 
