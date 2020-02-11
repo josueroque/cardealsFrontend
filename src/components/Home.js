@@ -1,7 +1,7 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {authUserAction} from '../store/actions/userActions';
-import Navbar from './Navbar';
+import SideBar from './SideBar';
 function Home(props){
     const dispatch=useDispatch();
     const user=useSelector(state=>state.user.user);
@@ -10,7 +10,7 @@ function Home(props){
     //     props.history.push('/login');
     // }
     return(
-        <Navbar></Navbar>
+        <SideBar></SideBar>
         
     )
 }

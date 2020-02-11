@@ -2,7 +2,7 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import {logoutUserAction} from '../store/actions/userActions';
-//import {instance} from '../components/SideBar';
+import PersistentDrawerLeft from '../components/SideBar';
 
 function Navbar(){
     const dispatch=useDispatch(); 
@@ -11,8 +11,8 @@ function Navbar(){
 
     return(
         <Fragment>
-            <instance></instance>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+           
+            {/* <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         
             <Link to={ {pathname: `/`}} className ="navbar-brand" > 
                   Cardeals
@@ -61,10 +61,10 @@ function Navbar(){
                 <input className="form-control mr-sm-2" type="text" placeholder="Search" />
                 <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form> */}
-            </div>
+            {/* </div> */}
             
-            </nav>  
-              
+            {/* </nav>   */} */}
+            <PersistentDrawerLeft></PersistentDrawerLeft>
             {user.token ? 
                 <h5>User: {user.name} {user.nickname} </h5>
                 : ''

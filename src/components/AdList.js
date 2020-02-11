@@ -2,6 +2,7 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
 import Navbar from './Navbar';
+import { Container } from '@material-ui/core';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { getAdsAction } from '../store/actions/adsActions';
@@ -21,6 +22,7 @@ function AdList(){
     return(
         <Fragment>
         <Navbar></Navbar>
+        <Container className="Container">
         <h2>Created Adverts</h2>
         <table className="table table-hover table-list">
             <thead>
@@ -57,6 +59,7 @@ function AdList(){
             }
             </tbody>
         </table> 
+        </Container>
         </Fragment>
     )
 }

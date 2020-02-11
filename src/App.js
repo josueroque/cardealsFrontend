@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import "./index.css";
-import "bootswatch/dist/cerulean/bootstrap.min.css"; 
+//import "bootswatch/dist/cerulean/bootstrap.min.css"; 
 //import "../node_modules/jquery/dist/jquery.min.js";
-import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
+//import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';

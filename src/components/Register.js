@@ -1,10 +1,33 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {saveUserAction} from '../store/actions/userActions';
-import Navbar from'./Navbar';
+import SideBar from'./SideBar';
 import Login from './Login';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
+import { Container } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+import { FormGroup } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import MuiAlert from '@material-ui/lab/Alert';
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  
+  const useStyles = makeStyles(theme => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2), 
+      },
+    },
+  }));
+
 
 function Register(props){
     
@@ -20,8 +43,10 @@ function Register(props){
     const [nickname,updateNickname] =useState('');
     const [email,updateEmail] =useState('');
     const [password,updatePassword] =useState('');
+    const [open, setOpen] = React.useState(false);
     const [passwordConfirmation,updatePasswordConfirmation] =useState('');
     const saveUser=(newUser) =>dispatch(saveUserAction(newUser));
+    const classes = useStyles();
 
     useEffect(()=>{
         if (error===true && errorInfo){
@@ -79,10 +104,11 @@ function Register(props){
     
     }  
 
+
     return(
         <Fragment>
-            <Navbar></Navbar>
-            <div className="container">
+            <SideBar className="SideBar"></SideBar>
+            <Container border={0} className="Container">
                 <form
                     onSubmit={e=> {
                             e.preventDefault();
@@ -102,7 +128,7 @@ function Register(props){
                         } 
                      }
                 >
-                    <fieldset>
+                  
                         <h1>Register</h1>
                         {loading===true  ? 
                                     <h3 >Saving...</h3>
@@ -122,31 +148,30 @@ function Register(props){
                                    
                                     { afterSave===true ?         
                                                                                    
-                                        <div className= {error===true? "alert alert-dismissible alert-danger":"alert alert-dismissible alert-success"}  >
-                                            <button type="button" className="close" data-dismiss="alert">&times;</button>
-                                            <strong>{error===true ? internalError:'You have been registered succefully!'}  </strong>                                         
+                                        <div    >
+                                               <Alert severity={error===true?'error':'success'  }>{error===true ? internalError:'You have been registered succefully!'}</Alert>  
                                         </div>
                                         :''
                                     }                                     
                                         
                                                                 
-                        <div className="form-group row">
+                        <FormGroup>
                             {/* <label for="exampleInputEmail1">Email address</label> */}
-                            <input type="text"
-                                className="form-control"
+                            <TextField type="text"
+//                                className="form-control"
                                 id="name" 
                                 placeholder="Type your name" 
                                 onChange={e=>updateName(e.target.value)}
                                 value={name}
                                 required />
-                            <input type="text"
+                            <TextField type="text"
                                  className="form-control"
                                  id="nickname" 
                                  placeholder="Type your nickname"
                                  onChange={e=>updateNickname(e.target.value)}
                                  value={nickname}
                                  required />
-                            <input type="email"
+                           <TextField type="text"
                                 className="form-control"
                                 id="email"
                                 aria-describedby="emailHelp"
@@ -156,7 +181,7 @@ function Register(props){
                                 required/>
                             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                             {/* <label for="exampleInputPassword1">Password</label> */}
-                            <input type="password"
+                            <TextField type="password"
                                  className="form-control"
                                  id="password" 
                                  placeholder="Password"
@@ -164,29 +189,28 @@ function Register(props){
                                  value={password}
                                  required />
                             {/* <label for="exampleInputPassword1">Confirm your password</label> */}
-                            <input type="password"
+                            <TextField type="password"
                                 className="form-control"
                                 id="passwordConfirmation" 
                                 placeholder="Confirm your Password"
                                 onChange={e=>updatePasswordConfirmation(e.target.value)}
                                 value={passwordConfirmation}
                                 required/>
-                        </div>
+                  
                         { password!==passwordConfirmation && passwordConfirmation !=='' ?         
                                                                                    
-                            <div className= "alert alert-dismissible alert-danger"  >
-                            <button type="button" className="close" data-dismiss="alert">&times;</button>
-                            <strong> The passwords doesn't match!  </strong>                                         
+                            <div   >
+                                         <Alert severity="warning">The passwords does not match!</Alert>
                             </div>
                             :''
                          }                       
                        
-                    </fieldset>
-                    <div className="col text-center">
-                    <button type="submit" className="btn btn-primary btn-lg">     Submit    </button>
-                    </div>
+                       </FormGroup>
+                    <Grid container justify="center">
+                    <Button className="centerButton" type="submit" variant="contained" color="primary">     Submit    </Button>
+                    </Grid>
                 </form>   
-            </div> 
+            </Container> 
 
         </Fragment>
     )

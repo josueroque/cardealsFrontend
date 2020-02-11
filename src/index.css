@@ -1,13 +1,5 @@
 
-/* 
-img{
-    margin-left: 1.5vw;
-    margin-right: 1.5vw;
-    margin-top: 2vh;
-    height: 18vh;
-    width: 25vw;
 
-} */
 .btn-table{
   /* width:4vw; */
   margin-left: 1vw;
@@ -35,24 +27,46 @@ img{
   margin-left:1vw !important; 
   margin-top: 0vw !important;
 }
-.container{
-  width: 50% !important;
-  background-color: white !important;
+centerDiv{
+  display: flex;
+  justify-content: center;
+}
+.SideBar{
+  height: 0vw !important;
+  max-height: 0vw !important;
 }
 
+.centerButton{
+  margin-top: 2vw !important;
+}
 
+.Container{
+  margin-top: 10vw !important;
+  border-color: #f1f1f1 !important;
+  width: 50% !important;
+  border: 0px;
+}
+
+.Link{
+  text-decoration: none;
+  color: #f1f1f1;
+}
+.Link-menu{
+  text-decoration: none;
+}
 
 .container-Ad{
   width: 100% !important;
+  margin-top: 5vw;
   background-color: white !important;
 }
 
 .navbar-expand-lg{
   font-size: 1em !important;
 }
-.nav-link{
+/* .nav-link{
     font-size: 1em !important;
-}
+} */
 h1{
     margin-top: 5vh !important; 
     text-align: center;
@@ -86,11 +100,14 @@ h5{
     margin-left: 2vw;
     margin-top: 2vw;
 }
-
+div-center{
+  display:inline-block;
+text-align: center;
+}
 .table{
-    margin-left: 2vw;
-    margin-right: 2vw;
-    width: 96vw !important;
+    margin-left: 0vw;
+    margin-right: 5vw;
+    width: 85vw !important;
 }
 
 /* Login form */
@@ -132,7 +149,6 @@ img.avatar {
   width: 15%;
   border-radius: 50%;
 }
-
 
 
 span.psw {

@@ -1,7 +1,7 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {authUserAction} from '../store/actions/userActions';
-import Navbar from'./Navbar';
+import SideBar from'./SideBar';
 
 function Login(props){
 
@@ -24,7 +24,7 @@ function Login(props){
 
     return(
         <Fragment>
-            <Navbar></Navbar>
+            <SideBar></SideBar>
             <h2 className="login">Login Form</h2>
 
             <form

@@ -2,6 +2,7 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
 import Navbar from './Navbar';
+import { Container } from '@material-ui/core';
 import MultipleImageUpload from './MultipleImageUpload';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
@@ -47,7 +48,6 @@ function NewAd(props){
         years.push(i);
     }
     
-
     
     const override = css`
     display: block;
@@ -113,9 +113,9 @@ function NewAd(props){
                 </Fragment>
         :          
         <Fragment>
-        <h2> New Advert </h2>
+     
 
-        <div className="container container-Ad">
+        <Container className="Container">
      
         <form
         onSubmit={e=> {
@@ -169,6 +169,9 @@ function NewAd(props){
                     }
                    
         >
+        
+        <h2 className="h2-Ad"> New Advert </h2>
+
         <div className="row col-md-6 form-group form-group-Ad">
 
                      
@@ -291,7 +294,7 @@ function NewAd(props){
                                    
             </div>   
         </form>
-        </div>  
+        </Container>  
          </Fragment>
     }   
        
