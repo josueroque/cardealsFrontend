@@ -161,9 +161,9 @@ export default function Sidebar() {
         <List>
           {[`${!user.token ? 'Sign in':'Sign out'}`, 'Register', 'Search', 'About'].map((text, index) => (
           
-          <Link to={ {pathname: `/${text}`}}  className="Link-menu"  onClick={text==='Sign out' ?  ()=>logOut(user) :()=>{}}>  
-           <ListItem button key={text}>
-              <ListItemIcon>  {text==='Sign in' && <LockOpen></LockOpen> ||
+          <Link key ={text} to={ {pathname: `/${text}`}}  className="Link-menu"  onClick={text==='Sign out' ?  ()=>logOut(user) :()=>{}}>  
+           <ListItem button >
+              <ListItemIcon key ={text}>  {text==='Sign in' && <LockOpen></LockOpen> ||
                                text==='Sign out' && <ExitToApp></ExitToApp> || 
                                text==='Register' && <AssignmentInd></AssignmentInd> ||
                                text==='Search' && <Search></Search> ||

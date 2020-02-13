@@ -5,6 +5,9 @@ import {
     START_GET_ADS,
     GET_ADS_SUCCESS,
     GET_ADS_FAILURE,
+    START_DELETE_AD,
+    DELETE_AD_SUCCESS,
+    DELETE_AD_FAILURE,
 
 } from '../types';
 
@@ -14,6 +17,29 @@ const initialState={ads:[],ad:{},loading:false,error:false,errorInfo:''};
 
 export default function (state=initialState,action){
     switch(action.type){
+        case START_DELETE_AD:
+            return{
+                ...state,
+                loading:true,
+                error:false,
+                errorInfo:''
+            } 
+        case DELETE_AD_SUCCESS:
+            return{
+                ...state,
+            //   ad:action.payload,
+                loading:false,
+                error:false,
+            }
+        case DELETE_AD_FAILURE:
+            return{
+                ...state,
+                // ad:{},
+                loading:false,
+                error:true,
+                errorInfo:action.payload
+            }    
+
         case START_SAVE_AD:
             return{
                 ...state,
@@ -36,9 +62,11 @@ export default function (state=initialState,action){
                 error:true,
                 errorInfo:action.payload
             }    
+
         case START_GET_ADS:
             return{
                 ...state,
+                ads:[],
                 loading:true,
                 error:false,
                 errorInfo:''

@@ -123,3 +123,23 @@ export async function getMakes(){
     throw(error);
   }
 }
+
+export const  deleteAd= async (id,token) =>{
+  try {
+    const requestUrl =URL +'/adverts/'+id;
+
+     const config = {
+       headers: { 
+        
+        'x-access-token': `${token}`,
+        // 'Content-Type':'multipart/form-data'},
+       }};
+    console.log(requestUrl);
+    const response = await axios.delete(requestUrl,config);
+    console.log(response);
+    return response;   
+  } catch (error) {
+   
+    throw(error);
+  }
+}

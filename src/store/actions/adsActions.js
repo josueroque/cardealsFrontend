@@ -5,9 +5,12 @@ import {
     START_GET_ADS,
     GET_ADS_SUCCESS,
     GET_ADS_FAILURE,
+    START_DELETE_AD,
+    DELETE_AD_SUCCESS,
+    DELETE_AD_FAILURE,
 } from '../types';
 
-import {saveAd,getAdsUser} from '../../services/apiServices';
+import {saveAd,deleteAd,getAdsUser} from '../../services/apiServices';
 
 export const saveAdSuccess=ad=>({
     type:SAVE_AD_SUCCESS,
@@ -20,6 +23,20 @@ export const startSaveAd = () => ({
 
 export const saveAdFailure = (error) => ({
     type: SAVE_AD_FAILURE,
+    payload:error
+});
+
+export const deleteAdSuccess=ad=>({
+    type:DELETE_AD_SUCCESS,
+    payload:ad
+});
+
+export const startDeleteAd = () => ({
+    type: START_DELETE_AD
+});
+
+export const deleteAdFailure = (error) => ({
+    type: DELETE_AD_FAILURE,
     payload:error
 });
 
@@ -55,16 +72,32 @@ export  function  saveAdAction  (ad,token,files) {
      }
  };
 
+ export  function  deleteAdAction  (id,token) {
+    return async (dispatch)=>{
+         dispatch(startDeleteAd());
+
+         try {
+             console.log(id);
+            const response=await deleteAd(id,token);
+            dispatch(deleteAdSuccess(id));
+               
+         } catch (error) {
+             console.log(error);
+             dispatch(deleteAdFailure(error));
+         }
+     }
+ };
+
  export  function  getAdsAction  (filter) {
     return async (dispatch)=>{
          dispatch(startGetAds());
 
          try {
-            console.log(filter.user);
+      //      console.log(filter.user);
             if (filter.user){
             const response=await getAdsUser(filter.user);
             dispatch(getAdsSuccess(response.data.results));
-            console.log(response);
+    //        console.log(response);
 
             }
                

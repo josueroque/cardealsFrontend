@@ -62,6 +62,8 @@ function NewAd(props){
    
     useEffect(()=>{
         getMakes();
+        fileObj = [];
+        fileArray = [];
     },[])
 
     useEffect(()=>{
