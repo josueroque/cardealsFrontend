@@ -78,8 +78,8 @@ function AdList(props){
     const handleCloseYes = async(e) => {
         try {
         console.log(e);    
-       // await deleteAd(deleteId);
-        //updateDeleteId(null);
+        await deleteAd(e);
+        updateDeleteId(null);
        // setOpen(false);
 
         } catch (error) {
