@@ -8,9 +8,27 @@ import {
     START_DELETE_AD,
     DELETE_AD_SUCCESS,
     DELETE_AD_FAILURE,
+    START_EDIT_AD,
+    EDIT_AD_SUCCESS,
+    EDIT_AD_FAILURE
 } from '../types';
 
-import {saveAd,deleteAd,getAdsUser,getAd} from '../../services/apiServices';
+import {saveAd,deleteAd,getAdsUser,getAd,editAd} from '../../services/apiServices';
+
+export const editAdSuccess=ad=>({
+    type:EDIT_AD_SUCCESS,
+    payload:ad
+});
+
+export const startEditAd = () => ({
+    type: START_EDIT_AD
+});
+
+export const editAdFailure = (error) => ({
+    type: EDIT_AD_FAILURE,
+    payload:error
+});
+
 
 export const saveAdSuccess=ad=>({
     type:SAVE_AD_SUCCESS,
@@ -68,6 +86,23 @@ export  function  saveAdAction  (ad,token,files) {
          } catch (error) {
              console.log(error);
              dispatch(saveAdFailure(error));
+         }
+     }
+ };
+
+
+ export  function  editAdAction  (ad,id,token) {
+    return async (dispatch)=>{
+         dispatch(startEditAd());
+
+         try {
+             console.log(ad);
+            const response=await editAd(ad,id,token);
+            dispatch(editAdSuccess(response.data.results));
+               
+         } catch (error) {
+             console.log(error);
+             dispatch(editAdFailure(error));
          }
      }
  };

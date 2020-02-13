@@ -161,8 +161,8 @@ export default function Sidebar() {
         <List>
           {[`${!user.token ? 'Sign in':'Sign out'}`, 'Register', 'Search', 'About'].map((text, index) => (
           
-          <Link key ={text} to={ {pathname: `/${text}`}}  className="Link-menu"  onClick={text==='Sign out' ?  ()=>logOut(user) :()=>{}}>  
-           <ListItem button >
+          <Link key ={text} to={ {pathname: `/${text.replace(/\s/g,'')}`}}  className="Link-menu"  onClick={text==='Sign out' ?  ()=>logOut(user) :()=>{}}>  
+           <ListItem button  >
               <ListItemIcon key ={text}>  {text==='Sign in' && <LockOpen></LockOpen> ||
                                text==='Sign out' && <ExitToApp></ExitToApp> || 
                                text==='Register' && <AssignmentInd></AssignmentInd> ||
@@ -178,7 +178,7 @@ export default function Sidebar() {
         <Divider />
         <List>
           {['Create ad', 'View list'].map((text, index) => (
-         <Link to={ {pathname: `/${text}`}}  className="Link-menu"  >           
+         <Link key={text} to={ {pathname: `/${text.replace(/\s/g,'')}`}}  className="Link-menu"  >           
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />

@@ -18,12 +18,12 @@ class App  extends Component {
           <Switch>
             {/* <Route exact path="/country/:id"  component={Country}  /> */}
             <Route exact path="/edit/:id" component={EditAd}  />
-            <Route exact path='/Sign in' component={Login}  />
-            <Route exact path='/Sign out' component={Login}  />
+            <Route exact path='/Signin' component={Login}  />
+            <Route exact path='/Signout' component={Login}  />
             <Route exact path='/register' component={Register}  />
             <Route exact path='/' component={Home}  />
-            <Route exact path='/Create Ad' component={NewAd}  />
-            <Route exact path='/View list' component={AdList}  />
+            <Route exact path='/CreateAd' component={NewAd}  />
+            <Route exact path='/Viewlist' component={AdList}  />
           </Switch>
          
       </Router>

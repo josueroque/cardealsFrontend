@@ -8,7 +8,9 @@ import {
     START_DELETE_AD,
     DELETE_AD_SUCCESS,
     DELETE_AD_FAILURE,
-
+    START_EDIT_AD,
+    EDIT_AD_SUCCESS,
+    EDIT_AD_FAILURE
 } from '../types';
 
 import { REHYDRATE } from 'redux-persist';
@@ -17,6 +19,29 @@ const initialState={ads:[],ad:{},loading:false,error:false,errorInfo:''};
 
 export default function (state=initialState,action){
     switch(action.type){
+        case START_EDIT_AD:
+            return{
+                ...state,
+                loading:true,
+                error:false,
+                errorInfo:''
+            } 
+        case EDIT_AD_SUCCESS:
+            return{
+                ...state,
+                ad:action.payload,
+                loading:false,
+                error:false,
+            }
+        case EDIT_AD_FAILURE:
+            return{
+                ...state,
+                ad:{},
+                loading:false,
+                error:true,
+                errorInfo:action.payload
+            }    
+
         case START_DELETE_AD:
             return{
                 ...state,

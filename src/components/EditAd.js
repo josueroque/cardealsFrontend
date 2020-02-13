@@ -6,7 +6,7 @@ import SideBar from './SideBar';
 import MultipleImageUpload from './MultipleImageUpload';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
-import { saveAdAction } from '../store/actions/adsActions';
+import { editAdAction } from '../store/actions/adsActions';
 import { Container } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
 import { FormGroup } from '@material-ui/core';
@@ -61,7 +61,7 @@ function EditAd(props){
     const getMakes=() =>dispatch(getMakesAction());
     const getModels=(make) =>dispatch(getModelsAction(make));
     const getAdverts=(id) =>dispatch(getAdsAction(id));   
-    const saveAd=(ad,token,files) =>dispatch(saveAdAction(ad,token,files));
+    const editAd=(ad,id,token) =>dispatch(editAdAction(ad,id,token));
    
     useEffect(()=>{
         getMakes();
@@ -129,25 +129,25 @@ function EditAd(props){
         });
     }
     
-    const saveNew=async(advert)=>{
-        // try {       
+    const editAdvert=async(advert)=>{
+         try {       
             
             updateLoading(true);
-            console.log(fileObj);
-            saveAd(advert,user.token,fileObj);
+            console.log(advert);
+            editAd(advert,props.location.state.adId,user.token);
             await wait(1000);
             updateLoading(false);
             updateAfterSave(true);
             await wait(1000);
             updateLoading(false);
   
-        // }
+        }
        
     
-        // catch (error) {
-        //     console.log(loading);
-        //     console.log(error);
-        // }
+        catch (error) {
+            console.log(loading);
+            console.log(error);
+        }
     
     }  
 
@@ -194,23 +194,18 @@ function EditAd(props){
                         currency:currency,
                         country:'Honduras',
                         city:'Tergucigalpa',
-                        photo:photo,
-                        user:user.email
+                    //    photo:photo,
+              //          user:user.email
                         }
                       let Ad=new FormData();
-                      //Ad=createdAd;
-                      console.log(file);
-                   //   Ad.append('photo',file);
-//                      Ad.append('photo[1]',file[1]);
-                      console.log(file[0]);      
-                      console.log(fileObj[0].length);      
+  
 
 
-                      for(let i=0 ;i<fileObj[0].length;i++){
-                        Ad.append('photos',fileObj[0][i]);
+                    //   for(let i=0 ;i<fileObj[0].length;i++){
+                    //   //  Ad.append('photos',fileObj[0][i]);
 
-                      }
-                      Ad.append('photo',[]);
+                    //   }
+                     // Ad.append('photo',[]);
                       Ad.append('make',createdAd.make);
                       Ad.append('model',createdAd.model);
                       Ad.append('description',createdAd.description);
@@ -221,8 +216,9 @@ function EditAd(props){
                       Ad.append('currency',createdAd.currency);
                       Ad.append('country',createdAd.country);
                       Ad.append('city',createdAd.city)
-                      Ad.append('user',user.email);
-                      saveNew(Ad);
+                  //    Ad.append('user',user.email);
+                  console.log(Ad);
+                      editAdvert(createdAd);
                   
                      }
                     }
