@@ -68,29 +68,25 @@ function EditAd(props){
       //  getModels(make);
         fileObj = [];
         fileArray = [];
-       console.log (props.location.state.adId);
+      console.log (props.location.state.models);
+     //   if (props.location.state){
         getAdverts({id:props.location.state.adId});
+    //    }
     },[])
-
-    useEffect(async()=>{
-      await  getModels(make);
-        if (model!==ad.model){
-           updateModel(ad.model);
-        }
-    },[make])
 
     useEffect(()=>{
         updateFile(file );
     },[file])
 
     useEffect(()=>{
-        console.log(ad);
+       // console.log(ad);
        if(ad){
-      updateMake(ad.make);
-     // updateModel(ad.model);
+        updateMake(ad.make);
+        getModels(make);
+//        updateModel(ad.model);
         updateYear(ad.year);
         updateTransmition(ad.transmition);
-        console.log(ad.sell);
+        //console.log(ad.sell);
         if (ad.sell===true) updateType('Sell') ;
         else updateType('Buy'); 
         updateAmount(ad.price);
@@ -100,6 +96,23 @@ function EditAd(props){
      }
     },[ad])
 
+    useEffect(()=>{
+        updateFile(file );
+    },[file])
+
+    useEffect(()=>{
+        console.log(models);
+      if(ad)  console.log(ad.model);
+       if (ad) updateModel(ad.model );
+    },[models])
+
+        // useEffect(()=>{
+        // getModels(make);
+        // if (ad){
+        //   // console.log(ad.model); 
+        //    updateModel(ad.model);
+        // }
+        // },[make])
 
 
     let years=[];
@@ -245,6 +258,7 @@ function EditAd(props){
              </FormControl>       
              <FormControl className={classes.formControl}> 
              <InputLabel id="demo-simple-select-label">Model</InputLabel>              
+        {models.length>0 ?
                 <Select 
                 name="model"
                 onChange={e=>updateModel(e.target.value)}
@@ -257,6 +271,9 @@ function EditAd(props){
                     <MenuItem key={model.name} value={model.name} >{model.name}</MenuItem>
                 ):''}   
                 </Select>
+                :
+                ''
+            }                
               </FormControl>
               <FormControl>
                   <InputLabel id="demo-simple-select-label">Type</InputLabel>              

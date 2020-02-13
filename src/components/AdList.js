@@ -43,11 +43,13 @@ const useStyles = makeStyles({
 function AdList(props){
     const user =useSelector(state=>state.user.user);
     const ads =useSelector(state=>state.ads.ads);
+    const models=useSelector(state=>state.cars.models);    
     const [open, setOpen] = useState(false);
     const dispatch=useDispatch();
     const [deleteId,updateDeleteId]=useState('') ; 
     const getAdverts=(user) =>dispatch(getAdsAction(user));    
-    const deleteAd=(id) =>dispatch(deleteAdAction(id));    
+    const deleteAd=(id) =>dispatch(deleteAdAction(id));
+    const getModels=(make) =>dispatch(getModelsAction(make));    
     // const theme = useTheme();
     // const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -128,7 +130,9 @@ function AdList(props){
                    <Link   to={{
                            pathname: `/edit/${ad._id}` , 
                            state:{  
-                              adId:ad._id
+                              adId:ad._id,
+                           //   models:models,
+                           //   model:ad.model
                                                            
                            }}}
                     >         
@@ -138,6 +142,7 @@ function AdList(props){
                             color="primary"
                             className={classes.button}
                             startIcon={<EditIcon />}
+                            onClick={()=>getModels(ad.make)}
                         >
                             Edit
                     </Button> 
