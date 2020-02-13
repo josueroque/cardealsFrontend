@@ -146,7 +146,7 @@ function NewAd(props){
         <Fragment>
      
 
-        <Container className="Container">
+        <Container className="Container-Create">
      
         <form
         onSubmit={e=> {

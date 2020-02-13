@@ -108,7 +108,7 @@ function Register(props){
     return(
         <Fragment>
             <SideBar className="SideBar"></SideBar>
-            <Container border={0} className="Container">
+            <Container border={0} className="Container-Register">
                 <form
                     onSubmit={e=> {
                             e.preventDefault();

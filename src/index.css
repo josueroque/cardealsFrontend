@@ -1,4 +1,6 @@
-
+.Container-Register{
+  
+}
 
 .btn-table{
   /* width:4vw; */
@@ -37,19 +39,20 @@ centerDiv{
 }
 
 .currency{
-  width: 10vw !important;
+  width: 15vw !important;
 }
 
 .currencyGroup{
 display: grid;
 grid-template-columns: 1fr 1fr;
 align-items  :baseline;
+grid-gap: 1vw;
 /* top: 0; */
 margin-top: 0;
 }
-.column{
+/* .column{
   flex:50%;
-}
+} */
 
 .adsCardsGroup{
   display: grid;
@@ -62,7 +65,7 @@ margin-top: 0;
 }
 
 .amount{
-  width: 15vw !important;
+  width: 40vw !important;
 
 }
 
@@ -75,7 +78,7 @@ margin-top: 0;
   width: 50% !important;
 }
 
-.Container{
+.Container-Register{
   margin-top: 10vw !important;
   border-color: #f1f1f1 !important;
   width: 50% !important;
@@ -83,9 +86,16 @@ margin-top: 0;
 }
 
 .Container-list{
-  margin-top: 5vw !important;
+  margin-top: 6vw !important;
   border-color: #f1f1f1 !important;
   width: 100% !important;
+  border: 0px;
+}
+
+.Container-Create{
+  margin-top: 7.5vw !important;
+  border-color: #f1f1f1 !important;
+  width: 50% !important;
   border: 0px;
 }
 
@@ -195,6 +205,32 @@ span.psw {
     grid-template-columns: 1fr 1fr 1fr  ;
 
   }
+  .Container-list{
+    margin-top: 8.5vw !important;
+  }
+  .Container-Register{
+    margin-top: 10vw !important;
+    width: 75% !important;
+  }
+  .loginContainer{
+    margin-top: 15vw;
+    width: 65% !important;
+  }
+  .Container-Create{
+    margin-top: 10vw !important;
+   
+    width: 75% !important;
+   
+  }
+  .amount{
+   
+    width: 50vw !important;
+  
+  }
+  .currency{
+    margin-top: 2vw !important;
+    width: 25vw !important;
+  }
 }
 /* Change styles for span and cancel button on extra small screens */
 @media all and (max-width: 768px) {
@@ -209,11 +245,38 @@ span.psw {
   }
 
   .adsCardsGroup{
- 
+   
     grid-template-columns: 1fr 1fr  ;
     grid-gap: 5px ;
   } 
+  .Container-list{
+    margin-top:11vw !important;
+  }
+
+  .Container-Register{
+    margin-top: 15vw !important;
+    width: 75% !important;
+  }
+  .loginContainer{
+    margin-top: 20vw;
+    width: 75% !important;
+  }
+  .Container-Create{
+    margin-top: 12vw !important;
+
+    width: 85% !important;
+   
+  }
+  .amount{
+   
+    width: 50vw !important;
   
+  }
+  .currency{
+    margin-top: 1vw !important;
+    width: 25vw !important;
+  }
+
 }
 
 
@@ -237,7 +300,29 @@ span.psw {
     width: 95% !important;
     background-color: white !important;
   }
+  .Container-list{
+    margin-top:20vw !important;
+  }
+  .Container-Register{
+    margin-top: 25vw !important;
+    width: 95% !important;
+  }
+  .loginContainer{
+    margin-top: 25vw;
+    width: 99% !important;
+  }
+  .Container-Create{
+    margin-top: 22vw !important;
+   
+    width: 100% !important;
 
-
+  }
+  .amount{
+    width: 60vw !important;
+  
+  }
+  .currency{
+    width: 25vw !important;
+  }
 }
 
