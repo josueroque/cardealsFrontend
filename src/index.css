@@ -43,7 +43,9 @@ centerDiv{
 .currencyGroup{
 display: grid;
 grid-template-columns: 1fr 1fr;
-
+align-items  :baseline;
+/* top: 0; */
+margin-top: 0;
 }
 .column{
   flex:50%;
@@ -56,7 +58,7 @@ grid-template-columns: 1fr 1fr;
 }
 
 .column-Ads{
-  flex: 33%;
+  /* flex: 33%; */
 }
 
 .amount{
@@ -150,15 +152,7 @@ text-align: center;
     width: 85vw !important;
 }
 
-/* Login form */
-body {font-family: Arial, Helvetica, sans-serif;}
-form.login {border: 3px solid #f1f1f1;}
 
-input[type=text], input[type=password] {
-
-  margin: 8px 0;
-
-}
 
 button.login {
   background-color: #4CAF50;
@@ -195,11 +189,15 @@ span.psw {
   float: right;
   padding-top: 16px;
 }
+@media all and (max-width: 1024px) {
+  .adsCardsGroup{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr  ;
 
-
+  }
+}
 /* Change styles for span and cancel button on extra small screens */
-
-@media screen and (max-width: 960px) {
+@media all and (max-width: 768px) {
   span.psw {
      display: block;
      float: none;
@@ -209,18 +207,37 @@ span.psw {
     width: 75% !important;
     background-color: white !important;
   }
+
+  .adsCardsGroup{
+ 
+    grid-template-columns: 1fr 1fr  ;
+    grid-gap: 5px ;
+  } 
+  
 }
 
 
-@media screen and (max-width: 480px) {
+
+ @media all and (max-width: 480px) {
   span.psw {
      display: block;
      float: none;
+  }
+  .adsCardsGroup{
+ 
+    grid-template-columns: 1fr  ;
+    grid-gap: 10px ;
+  }
+
+  .column-Ads{
+   width: 100% !important;
   }
 
   .container{
     width: 95% !important;
     background-color: white !important;
   }
+
+
 }
 

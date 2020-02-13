@@ -104,7 +104,7 @@ function AdList(props){
                ads.map(ad=>
                
                <div className="column-Ads" key={ad._id}>
-               <Card  className={classes.root}>
+               <Card className="column-Ads" className={classes.root}>
                    <CardActionArea>
                    <CardMedia
                    className={classes.media}
