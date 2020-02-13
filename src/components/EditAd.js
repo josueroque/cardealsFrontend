@@ -1,6 +1,7 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
+import {getAdsAction} from '../store/actions/adsActions';
 import SideBar from './SideBar';
 import MultipleImageUpload from './MultipleImageUpload';
 import { ClipLoader } from 'react-spinners';
@@ -37,16 +38,17 @@ function Alert(props) {
     },
   }));
 
-function NewAd(props){
+function EditAd(props){
     const classes = useStyles();
     const user =useSelector(state=>state.user.user);
     const makes=useSelector(state=>state.cars.makes);
     const models=useSelector(state=>state.cars.models);
     const error=useSelector(state=>state.user.error);
-    const [make,updateMake]=useState('');
+    const ad=useSelector(state=>state.ads.ads[0]);
+    const [make,updateMake]=useState(ad?ad.make:'');
     const [model,updateModel]=useState('');
     const [type,updateType]=useState('');
-    const [year,updateYear]=useState('');
+    const [year,updateYear]=useState(ad?ad.year:'');
     const [currency,updateCurrency]=useState('');
     const [amount,updateAmount]=useState('');
     const [description,updateDescription]=useState('');
@@ -58,21 +60,47 @@ function NewAd(props){
     const dispatch=useDispatch();
     const getMakes=() =>dispatch(getMakesAction());
     const getModels=(make) =>dispatch(getModelsAction(make));
+    const getAdverts=(id) =>dispatch(getAdsAction(id));   
     const saveAd=(ad,token,files) =>dispatch(saveAdAction(ad,token,files));
    
     useEffect(()=>{
         getMakes();
+      //  getModels(make);
         fileObj = [];
         fileArray = [];
+       console.log (props.location.state.adId);
+        getAdverts({id:props.location.state.adId});
     },[])
 
-    useEffect(()=>{
-        getModels(make);
+    useEffect(async()=>{
+      await  getModels(make);
+        if (model!==ad.model){
+           updateModel(ad.model);
+        }
     },[make])
 
     useEffect(()=>{
         updateFile(file );
     },[file])
+
+    useEffect(()=>{
+        console.log(ad);
+       if(ad){
+      updateMake(ad.make);
+     // updateModel(ad.model);
+        updateYear(ad.year);
+        updateTransmition(ad.transmition);
+        console.log(ad.sell);
+        if (ad.sell===true) updateType('Sell') ;
+        else updateType('Buy'); 
+        updateAmount(ad.price);
+        updateCurrency(ad.currency);
+        updateDescription(ad.description);
+        updatePhoto(ad.photo);
+     }
+    },[ad])
+
+
 
     let years=[];
     for (let i=2020;i>1920;i--){
@@ -123,7 +151,7 @@ function NewAd(props){
     
     }  
 
-    //console.log(fileObj);
+   // console.log(props);
 
     return(
        <Fragment>
@@ -147,15 +175,13 @@ function NewAd(props){
      
 
         <Container className="Container-Create">
-     
+            <div>{props.state}</div>
         <form
         onSubmit={e=> {
                       e.preventDefault();
                       console.log(file);                      
                       updateLoading(true);
-                    //   fileObj.map(file=>
-                    //     updatePhoto(...photo, file.name)
-                    //   );
+
                      
                       let createdAd={
                         make,
@@ -172,6 +198,13 @@ function NewAd(props){
                         user:user.email
                         }
                       let Ad=new FormData();
+                      //Ad=createdAd;
+                      console.log(file);
+                   //   Ad.append('photo',file);
+//                      Ad.append('photo[1]',file[1]);
+                      console.log(file[0]);      
+                      console.log(fileObj[0].length);      
+
 
                       for(let i=0 ;i<fileObj[0].length;i++){
                         Ad.append('photos',fileObj[0][i]);
@@ -196,7 +229,7 @@ function NewAd(props){
                    
         >
         
-        <h2 className="h2-Ad"> New Advert </h2>
+        <h2 className="h2-Ad"> Edit Advert </h2>
 
         <FormGroup>
 
@@ -208,7 +241,7 @@ function NewAd(props){
                 value={make}
                  required
                 >
-                    <MenuItem key="default">---Select a make---</MenuItem>
+                    <MenuItem key="default">---Select a make--- </MenuItem>
                 {makes ? makes.map( make=>
                     <MenuItem key={make.name} value={make.name} >{make.name}</MenuItem>
                 ):''}   
@@ -230,7 +263,7 @@ function NewAd(props){
                 </Select>
               </FormControl>
               <FormControl>
-                  <InputLabel id="demo-simple-select-label">Model</InputLabel>              
+                  <InputLabel id="demo-simple-select-label">Type</InputLabel>              
                     <Select  className="form-control"
                     
                     name="type"
@@ -239,10 +272,12 @@ function NewAd(props){
                     required
                 >
                     <MenuItem key={'default'} value="default" >---Select type of advert---</MenuItem>
-                    <MenuItem key={'Sell'} value="sell" >Sell</MenuItem>
-                    <MenuItem key={'Buy'} value="buy" >Buy</MenuItem>
+                    <MenuItem key={'Sell'} value="Sell" >Sell</MenuItem>
+                    <MenuItem key={'Buy'} value="Buy" >Buy</MenuItem>
                 </Select>
-                </FormControl>                    
+                </FormControl>    
+                <FormControl>
+                  <InputLabel id="demo-simple-select-label">Year</InputLabel>                                   
                 <Select  className="form-control"
                     
                     name="year"
@@ -250,6 +285,7 @@ function NewAd(props){
                     value={year}
                     required
                 >
+
                     <MenuItem key={'default'} value="default" >---Select year---</MenuItem>
                     {years.map(year=>
                             <MenuItem key={year} value={year}>{year} </MenuItem>
@@ -257,7 +293,7 @@ function NewAd(props){
 
                     }
                 </Select>    
-                
+                </FormControl>
                 <Select  className="form-control"
                     
                     name="transmition"
@@ -303,7 +339,7 @@ function NewAd(props){
             {/* <input type="file" multiple value={afterSave===false? photo:''} accept="image/*" onChange={e=>updatePhoto(e.target.value)} className="form-control-file" id="photo" aria-describedby="fileHelp"></input>
             <small id="fileHelp" className="form-text text-muted">Select a photo</small> */}
             
-            <div className="form-group multi-preview">
+            {/* <div className="form-group multi-preview">
                     {(fileArray || []).map(url => (
                         <img className="img-preview" key={url} src={url} alt="..." />
                     ))}
@@ -311,7 +347,7 @@ function NewAd(props){
 
             <div className="form-group">
                     <input type="file"  accept="image/*" className="form-control" onChange={uploadMultipleFiles} multiple />
-            </div>
+            </div> */}
             
             {afterSave===true ?
                 <div   >
@@ -335,4 +371,4 @@ function NewAd(props){
     )
 }
 
-export default NewAd;
+export default EditAd;

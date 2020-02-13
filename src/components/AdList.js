@@ -87,14 +87,14 @@ function AdList(props){
         }
 
      };
-    console.log(ads);
+  //  console.log(ads);
   //  console.log(ads);
     return(
         <Fragment>
         <SideBar></SideBar>
         <Container className="Container-list">
 
-        <h2>Created Adverts</h2>
+        <h1>My Adverts</h1>
         
        {ads ?
         <div className="adsCardsGroup" >
@@ -125,6 +125,13 @@ function AdList(props){
                    </CardContent>
                    </CardActionArea>
                    <CardActions>
+                   <Link   to={{
+                           pathname: `/edit/${ad._id}` , 
+                           state:{  
+                              adId:ad._id
+                                                           
+                           }}}
+                    >         
                    <Button
                             variant="contained"
                             size="small"
@@ -134,7 +141,7 @@ function AdList(props){
                         >
                             Edit
                     </Button> 
-                    
+                    </Link>
                     {/* <Dialog id={deleteId} open={true} ></Dialog>  */}
                     
                    <Button

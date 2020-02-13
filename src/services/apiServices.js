@@ -63,8 +63,15 @@ export async function getMakes(){
  export async function getModels(make){  
    try {
      
-      const requestUrl =URL +'/makes/models?make='+make;
-   const response = await axios.get(requestUrl);
+      let requestUrl;
+   if (!make) {
+     requestUrl  =URL +'/makes/models';
+    } 
+    else{
+     requestUrl =URL +'/makes/models?make='+make;
+    }
+
+      const response = await axios.get(requestUrl);
    if (response.statusText!=="OK") {
         throw new Error('Error getting models');
       }
@@ -81,7 +88,25 @@ export async function getMakes(){
  export async function getAdsUser(user){  
   try {
     
-     const requestUrl =URL +'/adverts?user='+user;
+    const requestUrl =URL +'/adverts?user='+user;
+    const response = await axios.get(requestUrl);
+ 
+    if (response.statusText!=="OK") {
+        throw new Error('Error getting adverts');
+      }
+      return response; 
+    }
+  
+    catch(error){
+     console.error(error.response);
+     throw error;
+ }
+}
+
+export async function getAd(id){  
+  try {
+    
+    const requestUrl =URL +'/adverts?id='+id;
     const response = await axios.get(requestUrl);
  
     if (response.statusText!=="OK") {

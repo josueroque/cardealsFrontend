@@ -10,7 +10,7 @@ import {
     DELETE_AD_FAILURE,
 } from '../types';
 
-import {saveAd,deleteAd,getAdsUser} from '../../services/apiServices';
+import {saveAd,deleteAd,getAdsUser,getAd} from '../../services/apiServices';
 
 export const saveAdSuccess=ad=>({
     type:SAVE_AD_SUCCESS,
@@ -100,6 +100,13 @@ export  function  saveAdAction  (ad,token,files) {
     //        console.log(response);
 
             }
+
+            if (filter.id){
+                const response=await getAd(filter.id);
+                dispatch(getAdsSuccess(response.data.results));
+    
+            }    
+
                
          } catch (error) {
              console.log(error);
