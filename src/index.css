@@ -1,6 +1,4 @@
-.Container-Register{
-  
-}
+
 
 .btn-table{
   /* width:4vw; */
@@ -85,6 +83,19 @@ margin-top: 0;
   border: 0px;
 }
 
+.Container-Home{
+  display: grid;
+  grid-template-columns: 1fr   ;
+  grid-gap: 20px ;
+}
+.Container-Carousel{
+  margin-top: 0vw !important;
+  width: 40vw !important;
+  border: 0px;
+}
+LastAdsCard{
+  width: 10vw !important;
+}
 .Container-list{
   margin-top: 6vw !important;
   border-color: #f1f1f1 !important;

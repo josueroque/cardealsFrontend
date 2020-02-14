@@ -8,11 +8,10 @@ import NewAd from './components/NewAd';
 import EditAd from './components/EditAd';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-
 class App  extends Component {
   render(){ 
     return (
-     
+
         <Router>
       
           <Switch>

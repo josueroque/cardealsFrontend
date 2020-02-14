@@ -199,6 +199,12 @@ export default function Sidebar() {
           ))}
         </List>
       </Drawer>
+      <div>
+      <h5>
+        {user.token? 'Welcome '+ user.name:''}
+      </h5>
     </div>
+    </div>
+
   );
 }

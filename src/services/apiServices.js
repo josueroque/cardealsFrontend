@@ -87,8 +87,13 @@ export async function getMakes(){
 
  export async function getAdsUser(user){  
   try {
-    
-    const requestUrl =URL +'/adverts?user='+user;
+    let requestUrl;
+    if(user.limit){
+       requestUrl =URL +'/adverts?limit='+user.limit;
+    }
+    else{
+       requestUrl =URL +'/adverts?user='+user.user;
+    }
     const response = await axios.get(requestUrl);
  
     if (response.statusText!=="OK") {

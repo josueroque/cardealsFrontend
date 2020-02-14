@@ -129,8 +129,10 @@ export  function  saveAdAction  (ad,token,files) {
 
          try {
       //      console.log(filter.user);
+
+
             if (filter.user){
-            const response=await getAdsUser(filter.user);
+            const response=await getAdsUser(filter);
             dispatch(getAdsSuccess(response.data.results));
     //        console.log(response);
 
