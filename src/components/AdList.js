@@ -7,6 +7,7 @@ import { Container } from '@material-ui/core';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { getAdsAction,deleteAdAction } from '../store/actions/adsActions';
+import { editAdAction } from '../store/actions/adsActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -19,21 +20,23 @@ import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
-//import Dialog from '@material-ui/core/Dialog';
-//import Dialog from './Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+
 const useStyles = makeStyles({
   root: {
     width: 300,
     height:320
   },
   media: {
-    height: 200,
+    height: 180,
   },
   button: {
     // margin: theme.spacing(1),
@@ -50,8 +53,7 @@ function AdList(props){
     const getAdverts=(user) =>dispatch(getAdsAction(user));    
     const deleteAd=(id) =>dispatch(deleteAdAction(id));
     const getModels=(make) =>dispatch(getModelsAction(make));    
-    // const theme = useTheme();
-    // const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const editAd=(ad,id,token) =>dispatch(editAdAction(ad,id,token));
 
     useEffect(()=>{
       //  console.log(user.email);
@@ -64,18 +66,9 @@ function AdList(props){
         getAdverts({user:user.email});
 
     },[deleteId])
-    
-      
+         
 
     const classes = useStyles();
-    // const handleClickOpen = () => {
-    //     setOpen(true);
-    // };
-    
-    // const handleClose = () => {
-      
-    //     setOpen(false);
-    // };
 
     const handleCloseYes = async(e) => {
         try {
@@ -85,10 +78,20 @@ function AdList(props){
        // setOpen(false);
 
         } catch (error) {
-            
+            console.log(error);
         }
 
      };
+
+     const editAdvert=async(id,advert)=>{
+       try {
+         //console.log('prueba');
+         await editAd(advert,id,user.token);
+         updateDeleteId(id);
+       } catch (error) {
+         console.log(error);
+       }
+     }
   //  console.log(ads);
   //  console.log(ads);
     return(
@@ -118,12 +121,9 @@ function AdList(props){
                    <Typography gutterBottom variant="h6" component="h4">
                        {ad.make+' '+ad.model + ' '+ad.year}
                    </Typography>
-                       <Typography variant="body2" color="textSecondary" component="p">
-                            {/* {ad._id}
-                           {deleteId ?
-                            <div className='delete-button' onClick={} />
-                            :''} */}
-                            </Typography>
+                   <Typography variant="body2" color="textSecondary" component="p">
+                   {ad.reserved===true ? 'Reserved: yes':'Reserved: no '} {ad.active===true ? 'Sold: no':'Sold: yes'}
+                   </Typography>
                    </CardContent>
                    </CardActionArea>
                    <CardActions>
@@ -161,12 +161,21 @@ function AdList(props){
                           onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) handleCloseYes(ad._id) } }
                         >
                             Delete
-                        
-         
-
-                     
+                    
                     </Button>                   
-
+                    <PopupState variant="popover" popupId="demo-popup-menu">
+                        {popupState => (
+                          <React.Fragment>
+                            <Button variant="contained"  startIcon={<EditIcon />} size="small" color="default" {...bindTrigger(popupState)}>
+                              SET AS
+                            </Button>
+                            <Menu {...bindMenu(popupState)}>
+                              <MenuItem onClick={() => { popupState.close(); editAdvert(ad._id,{active:false});}}>Sold</MenuItem>
+                              <MenuItem onClick={() => { popupState.close(); editAdvert(ad._id,{reserved:true});}}>Reserved</MenuItem>
+                            </Menu>
+                          </React.Fragment>
+                        )}
+                     </PopupState>
                     {/* <Dialog
                     id={ad._id}
                     open={deleteId?true:false}

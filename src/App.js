@@ -12,9 +12,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 class App  extends Component {
   render(){ 
     return (
-    
+     
         <Router>
-         
+      
           <Switch>
 
             <Route exact path="/edit/:id" component={EditAd}  />
@@ -25,9 +25,9 @@ class App  extends Component {
             <Route exact path='/Viewlist' component={AdList}  />
             <Route exact path='/' component={Home}  />
           </Switch>
-         
+          
       </Router>
-
+     
     );
   }
   }
