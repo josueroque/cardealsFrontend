@@ -25,6 +25,7 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import Search from '@material-ui/icons/Search';
 import Info from '@material-ui/icons/Info';
 import AssignmentInd from '@material-ui/icons/AssignmentInd';
+import Button from '@material-ui/core/Button';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -126,7 +127,13 @@ export default function Sidebar() {
           [classes.appBarShift]: open,
         })}
       >
+   
+
+         
         <Toolbar>
+
+         
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -135,12 +142,17 @@ export default function Sidebar() {
             className={clsx(classes.menuButton, open && classes.hide)}
           >
             <MenuIcon />
+            
           </IconButton>
           <Link to={ {pathname: `/`}} className="Link" >  
           <Typography variant="h6" noWrap>
             Cardeals
           </Typography>
           </Link>
+        
+         <Button color="inherit" className="RightMenu">Sign in</Button> 
+         <Button color="inherit" >Register</Button>
+         <Button color="inherit" >Search</Button> 
         </Toolbar>
       </AppBar>
       <Drawer
@@ -175,8 +187,11 @@ export default function Sidebar() {
              </Link> 
           ))}
         </List>
+        
         <Divider />
+        {user.token ?    
         <List>
+
           {['Create ad', 'View list'].map((text, index) => (
          <Link key={text} to={ {pathname: `/${text.replace(/\s/g,'')}`}}  className="Link-menu"  >           
             <ListItem button key={text}>
@@ -186,8 +201,10 @@ export default function Sidebar() {
             </Link>
           ))}
         </List>
-
+                  :''
+        }
         <Divider />
+        {user.token ?    
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
           
@@ -198,6 +215,8 @@ export default function Sidebar() {
             
           ))}
         </List>
+        :''
+        } 
       </Drawer>
       <div>
       <h5>

@@ -85,17 +85,28 @@ margin-top: 0;
 
 .Container-Home{
   display: grid;
-  grid-template-columns: 1fr   ;
+  grid-template-columns: 1fr  ;
   grid-gap: 20px ;
 }
 .Container-Carousel{
   margin-top: 0vw !important;
-  width: 40vw !important;
-  border: 0px;
+  width: 50vw !important;
+
 }
-LastAdsCard{
-  width: 10vw !important;
+.CardHome{
+  height:30vw ;
+  width:50vw;
+
 }
+.CardMediaHome{
+  height:25vw ;
+  width:50vw;
+}
+
+.RightMenu{
+  margin-left: 65% !important;
+}
+
 .Container-list{
   margin-top: 6vw !important;
   border-color: #f1f1f1 !important;
@@ -211,6 +222,22 @@ span.psw {
   padding-top: 16px;
 }
 @media all and (max-width: 1024px) {
+
+  .Container-Carousel{
+    margin-top: 0vw !important;
+    width: 60vw !important;
+  
+  }
+  .CardHome{
+    height:40vw ;
+    width:60vw;
+  
+  }
+  .CardMediaHome{
+    height:30vw ;
+    width:60vw;
+  }
+
   .adsCardsGroup{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr  ;
@@ -245,6 +272,21 @@ span.psw {
 }
 /* Change styles for span and cancel button on extra small screens */
 @media all and (max-width: 768px) {
+  .Container-Carousel{
+    margin-top: 0vw !important;
+    width: 70vw !important;
+  
+  }
+  .CardHome{
+    height:60vw ;
+    width:70vw;
+  
+  }
+  .CardMediaHome{
+    height:50vw ;
+    width:70vw;
+  }
+
   span.psw {
      display: block;
      float: none;
@@ -293,6 +335,22 @@ span.psw {
 
 
  @media all and (max-width: 480px) {
+
+  .Container-Carousel{
+    margin-top: 0vw !important;
+    width: 100vw !important;
+    margin-left: -5vw !important;
+  }
+  .CardHome{
+    height:90vw ;
+    width:100vw;
+  
+  }
+  .CardMediaHome{
+    height:75vw ;
+    width:100vw;
+  }
+
   span.psw {
      display: block;
      float: none;
