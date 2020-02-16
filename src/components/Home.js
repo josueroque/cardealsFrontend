@@ -32,7 +32,7 @@ function Home(props){
         <Container className="Container-Home">
         <Container className="Container-Carousel">
             <h1>
-                Last adverts added
+                Lastest adverts added
             </h1>
         <Carousel autoplay>
                     { ads.length>0  ?

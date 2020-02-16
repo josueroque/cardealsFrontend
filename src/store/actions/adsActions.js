@@ -128,18 +128,20 @@ export  function  saveAdAction  (ad,token,files) {
          dispatch(startGetAds());
 
          try {
-      //      console.log(filter.user);
+//            console.log(filter);
 
 
-            if (filter.user){
+            if (filter.user||!filter.id){
             const response=await getAdsUser(filter);
+            console.log(response);
             dispatch(getAdsSuccess(response.data.results));
     //        console.log(response);
 
-            }
+            } 
 
             if (filter.id){
                 const response=await getAd(filter.id);
+                console.log(response);
                 dispatch(getAdsSuccess(response.data.results));
     
             }    

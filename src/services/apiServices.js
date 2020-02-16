@@ -88,12 +88,39 @@ export async function getMakes(){
  export async function getAdsUser(user){  
   try {
     let requestUrl;
+    let parameterSymbol='?';
+    console.log(user);
     if(user.limit){
        requestUrl =URL +'/adverts?limit='+user.limit;
+       parameterSymbol='&';
     }
     else{
-       requestUrl =URL +'/adverts?user='+user.user;
+      if(user.user){
+       requestUrl =URL +'/adverts'+parameterSymbol+ 'user='+user.user;
+       parameterSymbol='&';
+
+      }
+      else{
+        requestUrl =URL +'/adverts'
+
+      }
     }
+    if(user.amountFrom&&user.amountTo){
+      requestUrl+=parameterSymbol+ 'price='+user.amountFrom+'-'+user.amountTo;
+      parameterSymbol='&';
+
+    }
+    if(user.make){
+      requestUrl+=parameterSymbol+ 'make='+user.make;
+      parameterSymbol='&';
+
+    }
+    if(user.model){
+      requestUrl+=parameterSymbol+ 'model='+user.model;
+      parameterSymbol='&';
+
+    }
+    console.log(requestUrl);
     const response = await axios.get(requestUrl);
  
     if (response.statusText!=="OK") {

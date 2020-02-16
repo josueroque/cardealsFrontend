@@ -152,7 +152,9 @@ export default function Sidebar() {
         
          <Button color="inherit" className="RightMenu">Sign in</Button> 
          <Button color="inherit" >Register</Button>
-         <Button color="inherit" >Search</Button> 
+         <Link to={ {pathname: `/Search`}} className="Link" >           
+            <Button color="inherit" >Search</Button> 
+         </Link>
         </Toolbar>
       </AppBar>
       <Drawer
