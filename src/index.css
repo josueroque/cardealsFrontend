@@ -1,3 +1,41 @@
+
+.Container-Detail{
+  margin-top: 5vw !important;
+  width: 100vw !important;
+}
+
+.imgDetailGroup{
+margin-top: 1vw;  
+  display: grid;
+  width: 50vw !important;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items  :baseline;
+  grid-gap: 0vw;
+ 
+}
+
+.imgDetail{
+  height: 15vw !important;
+  width: 18vw !important;
+}
+.DetailField{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items  :baseline;
+  grid-gap: 1vw;
+  margin-top: -2vw;
+}
+
+.DetailValue{
+  margin-left: -80%;
+  font-size: 1.25em;
+  font-style: italic;
+}
+.h3Detail{
+  text-align: left;
+  /* margin-left: 10vw;
+  margin-top: 1.8vw; */
+}
 .img-table{
   width:10vw !important;
   height:7vw !important;
@@ -241,6 +279,19 @@ span.psw {
 
 
 @media all and (max-width: 1024px) {
+  .imgDetail{
+    height: 23vw !important;
+    width: 30vw !important;
+  }
+  
+  .imgDetailGroup{
+    margin-top: 1vw;  
+    width: 90vw !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 0vw;
+   
+  }
+
   .currencyGroupSearch{
     margin-top: 6vw !important;
   }
@@ -301,6 +352,30 @@ span.psw {
 }
 /* Change styles for span and cancel button on extra small screens */
 @media all and (max-width: 768px) {
+
+.DetailValue{
+  margin-left: -50%;
+  font-size: 1.25em;
+  font-style: italic;
+}
+.h3Detail{
+  text-align: left;
+  /* margin-left: 10vw;
+  margin-top: 1.8vw; */
+}
+  .imgDetail{
+    height: 30vw !important;
+    width: 45vw !important;
+  }
+  
+  .imgDetailGroup{
+    margin-top: 1vw;  
+    width: 90vw !important;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0vw;
+   
+  }
+
   .currencyGroupSearch{
     margin-top: 10vw !important;
   }
@@ -374,6 +449,29 @@ span.psw {
 }
 
  @media all and (max-width: 480px) {
+  .DetailValue{
+    margin-left: -30%;
+    font-size: 1.2em;
+    font-style: italic;
+  }
+  .h3Detail{
+    text-align: left;
+    /* margin-left: 10vw;
+    margin-top: 1.8vw; */
+  }
+  .imgDetail{
+    height: 60vw !important;
+    width: 90vw !important;
+  }
+  
+  .imgDetailGroup{
+    margin-top: 1vw;  
+    width: 100vw !important;
+    grid-template-columns: 1fr;
+    grid-gap: 0vw;
+   
+  }
+
   .currencyGroupSearch{
     margin-top: 25vw !important;
   }

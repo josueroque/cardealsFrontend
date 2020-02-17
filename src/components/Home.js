@@ -2,6 +2,7 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {authUserAction} from '../store/actions/userActions';
 import SideBar from './SideBar';
+import {Link} from 'react-router-dom';
 import { getAdsAction } from '../store/actions/adsActions';
 import Carousel from 'react-material-ui-carousel';
 import Paper from '@material-ui/core/Paper';
@@ -39,7 +40,17 @@ function Home(props){
                     
             
                     ads.map(ad=>
-                        <Paper>
+               <Paper>
+               <Link className="Link"   to={{
+                           pathname: `/detail/${ad._id}` , 
+                           state:{  
+                              adId:ad._id,
+                              fromSearch:"False"
+                           //   models:models,
+                           //   model:ad.model
+                                                           
+                           }}}
+               >                   
                <Card className="column-Ads CardHome" >
                    <CardActionArea>
                    <CardMedia
@@ -59,11 +70,11 @@ function Home(props){
                    </CardActionArea>
 
                 </Card>   
-             
+                </Link>
                         {/* <Button className="CheckButton">
                             Check it out!
                         </Button> */}
-                         </Paper>
+               </Paper>
                     
                     )
                 

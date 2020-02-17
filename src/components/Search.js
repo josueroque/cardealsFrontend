@@ -274,9 +274,14 @@ function Search(props){
             ? ads.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : ads
           ).map(ad => (
-            <TableRow key={ad._id}>
+           
+
+            <TableRow key={ad._id} hover onClick={() => props.history.push('/detail/'+ad._id)} 
+              state={ {adId:ad._id}} fromSearch="True" >
               <TableCell>
-              <img className="img-table" src={"http://localhost:3001/images/" + ad.photo[0]} alt=""></img>  
+
+              <img className="img-table" src={"http://localhost:3001/images/" + ad.photo[0]} alt=""></img>
+            
               </TableCell>
               
               <TableCell >
@@ -291,11 +296,13 @@ function Search(props){
               <TableCell >
                 {ad.currency} {ad.price}
               </TableCell>
-              <TableCell >
-               <Link>See more details</Link>  
-              </TableCell>
+
+ 
+    
+             
               {/* <TableCell align="right"><img ></img></TableCell> */}
             </TableRow>
+
           ))}
 
           {emptyRows > 0 && (
