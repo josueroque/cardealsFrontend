@@ -221,3 +221,24 @@ export const  editAd= async (ad,id,token) =>{
     throw(error);
   }
 }
+
+export const  editUser= async (user,id,token) =>{
+  try {
+    const requestUrl =URL +'/users/'+id;
+
+     const config = {
+       headers: { 
+        
+        'x-access-token': `${token}`,
+        // 'Content-Type':'multipart/form-data'},
+       }};
+    console.log(requestUrl);
+    console.log(user);
+    const response = await axios.put(requestUrl,user,config);
+    console.log(response);
+    return response;   
+  } catch (error) {
+   
+    throw(error);
+  }
+}

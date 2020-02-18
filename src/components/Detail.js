@@ -2,13 +2,12 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
 import {getAdsAction} from '../store/actions/adsActions';
+import {editUserAction} from '../store/actions/userActions';
 import SideBar from './SideBar';
-import MultipleImageUpload from './MultipleImageUpload';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { editAdAction } from '../store/actions/adsActions';
 import { Container } from '@material-ui/core';
-import { TextField } from '@material-ui/core';
 import { FormGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -30,6 +29,8 @@ import Menu from '@material-ui/core/Menu';
 import {Link} from 'react-router-dom';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownAlt from '@material-ui/icons/ThumbDownAlt';
 let fileObj = [];
 let fileArray = [];
 function Alert(props) {
@@ -72,7 +73,7 @@ function Detail(props){
     const getMakes=() =>dispatch(getMakesAction());
     const getModels=(make) =>dispatch(getModelsAction(make));
     const getAdverts=(id) =>dispatch(getAdsAction(id));   
-    const editAd=(ad,id,token) =>dispatch(editAdAction(ad,id,token));
+    const editUser=(user,id,token) =>dispatch(editUserAction(user,id,token));
     console.log(props);
     useEffect(()=>{
         
@@ -120,7 +121,9 @@ function Detail(props){
         });
     }
     
- 
+    const addFavorite=async(adId) =>{
+        await editUser({...user.favorites,adId},user._id,user.token);
+    }
 
    // console.log(props);
 
@@ -188,9 +191,20 @@ function Detail(props){
                 <h3 className="h3Detail">Description</h3>       
                 <h3 className="h3Detail DetailValue">{ ad? ad.description:''}</h3>        
             </div>                   
-            {/* <Grid container justify="center">
-            <Button className="centerButton" type="submit" variant="contained" color="primary">    Save   </Button>
-            </Grid> */}
+            <Grid >    
+                    <Button
+                            variant="contained"
+                            size="small"
+                            color="primary"
+                            className="centerButton"
+                            startIcon={<ThumbUpIcon />}
+                            onClick={()=>addFavorite(ad._id)}
+                        >
+                            Like
+                    </Button> 
+                    
+                    
+                </Grid>    
         </FormGroup>   
         </form>
 

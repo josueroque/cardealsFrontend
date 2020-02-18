@@ -6,11 +6,27 @@ import {
     AUTH_USER_SUCCESS,
     AUTH_USER_FAILURE,
     LOGOUT_USER,
-    LOGOUT_USER_SUCCESS
+    LOGOUT_USER_SUCCESS,
+    START_EDIT_USER,
+    EDIT_USER_SUCCESS,
+    EDIT_USER_FAILURE,
 } from '../types';
 
-import {saveUser,loginUser} from '../../services/apiServices';
+import {saveUser,loginUser,editUser} from '../../services/apiServices';
 
+export const EditUserSuccess=user=>({
+    type:EDIT_USER_SUCCESS,
+    payload:user
+});
+
+export const startEditUser = () => ({
+    type: START_EDIT_USER
+});
+
+export const editUserFailure = (error) => ({
+    type: EDIT_USER_FAILURE,
+    payload:error
+});
 
 export const saveUserSuccess=user=>({
     type:SAVE_USER_SUCCESS,
@@ -68,6 +84,25 @@ export  function  saveUserAction  (user) {
      }
  };
 
+ export  function  editUserAction  (user,id,token) {
+    return async (dispatch)=>{
+         dispatch(startEditUser());
+         console.log(user);
+
+         try {
+             
+            const response=await editUser(user,id,token);
+            console.log(response);
+            //dispatch(saveUserSuccess(user));
+               
+         } catch (error) {
+             console.log(typeof(error.data.error));
+             dispatch(editUserFailure(error.data.error));
+         }
+     }
+ };
+
+
 export  function  authUserAction  (user) {
     return async (dispatch)=>{
          dispatch(startAuthUser());
@@ -82,6 +117,10 @@ export  function  authUserAction  (user) {
                 user.token=response.data.token;
                 user.name=response.data.name;
                 user.nickname=response.data.nickname;
+                user._id=response.data._id;
+                user.favorites=response.favorites;
+                user.password='';
+                console.log(user);
                 dispatch(authUserSuccess(user));
             }
             else {

@@ -119,6 +119,7 @@ margin-top: 0;
 .centerButton{
   margin-top: 2vw !important;
   width: 10vw;
+  margin-left: 1vw !important;
 }
 .loginContainer{
   margin-top: 10vw;

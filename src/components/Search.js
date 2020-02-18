@@ -277,7 +277,7 @@ function Search(props){
            
 
             <TableRow key={ad._id} hover onClick={() => props.history.push('/detail/'+ad._id)} 
-              state={ {adId:ad._id}} fromSearch="True" >
+              state={ {adId:ad._id}}  >
               <TableCell>
 
               <img className="img-table" src={"http://localhost:3001/images/" + ad.photo[0]} alt=""></img>
