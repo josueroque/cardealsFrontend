@@ -41,7 +41,7 @@ export default function (state=initialState,action){
         case EDIT_USER_FAILURE:
             return{
                 ...state,
-                user:{},
+             //   user:{},
                 loading:false,
                 error:true,
                 errorInfo:action.payload

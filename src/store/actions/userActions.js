@@ -14,7 +14,7 @@ import {
 
 import {saveUser,loginUser,editUser} from '../../services/apiServices';
 
-export const EditUserSuccess=user=>({
+export const editUserSuccess=user=>({
     type:EDIT_USER_SUCCESS,
     payload:user
 });
@@ -93,11 +93,11 @@ export  function  saveUserAction  (user) {
              
             const response=await editUser(user,id,token);
             console.log(response);
-            //dispatch(saveUserSuccess(user));
+            dispatch(editUserSuccess(user));
                
          } catch (error) {
-             console.log(typeof(error.data.error));
-             dispatch(editUserFailure(error.data.error));
+           //  console.log(typeof(error.data.error));
+             dispatch(editUserFailure(error));
          }
      }
  };
@@ -118,7 +118,7 @@ export  function  authUserAction  (user) {
                 user.name=response.data.name;
                 user.nickname=response.data.nickname;
                 user._id=response.data._id;
-                user.favorites=response.favorites;
+                user.favorites=response.data.favorites;
                 user.password='';
                 console.log(user);
                 dispatch(authUserSuccess(user));

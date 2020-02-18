@@ -89,7 +89,7 @@ export async function getMakes(){
   try {
     let requestUrl;
     let parameterSymbol='?';
-    console.log(user);
+   // console.log(user);
     if(user.limit){
        requestUrl =URL +'/adverts?limit='+user.limit;
        parameterSymbol='&';
@@ -120,7 +120,7 @@ export async function getMakes(){
       parameterSymbol='&';
 
     }
-    console.log(requestUrl);
+    //console.log(requestUrl);
     const response = await axios.get(requestUrl);
  
     if (response.statusText!=="OK") {
@@ -160,8 +160,8 @@ export async function getAd(id){
     // console.log('desde api Save ');
     // console.log(ad);
     //console.log(requestUrl);
-    console.log(files);
-    console.log(ad);
+    //console.log(files);
+    //console.log(ad);
      const config = {
        headers: { 
         

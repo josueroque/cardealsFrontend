@@ -68,9 +68,12 @@ function EditAd(props){
       //  getModels(make);
         fileObj = [];
         fileArray = [];
-      console.log (props.location.state.models);
+     // console.log (props.location.state.models);
      //   if (props.location.state){
+        if(props.location.state) {
         getAdverts({id:props.location.state.adId});
+        }
+
     //    }
     },[])
 

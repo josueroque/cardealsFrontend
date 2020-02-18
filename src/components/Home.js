@@ -64,7 +64,7 @@ function Home(props){
                       </Typography>
 
                         <Typography variant="body2" color="textSecondary" component="p">
-                        {ad.description}
+                        {/* {ad.description} */}
                         </Typography>
                         </CardContent>
                    </CardActionArea>

@@ -58,6 +58,7 @@ function Detail(props){
     const error=useSelector(state=>state.user.error);
     const ad=useSelector(state=>state.ads.ads[0]);
     const [make,updateMake]=useState(ad?ad.make:'');
+    const [like,updateLike]=useState(true);
     const [model,updateModel]=useState('');
     const [type,updateType]=useState('');
     const [year,updateYear]=useState(ad?ad.year:'');
@@ -74,17 +75,40 @@ function Detail(props){
     const getModels=(make) =>dispatch(getModelsAction(make));
     const getAdverts=(id) =>dispatch(getAdsAction(id));   
     const editUser=(user,id,token) =>dispatch(editUserAction(user,id,token));
-    console.log(props);
+  //  console.log(props);
+   useEffect(()=>{
+   if (user.favorites){ 
+    if (props.location.state){
+
+        if(user.favorites.includes(props.location.state.adId)){
+            updateLike(false);
+        }
+        else{
+            updateLike(true);
+        }
+     }
+     else if (props.match.params.id){
+        if(user.favorites.includes(props.match.params.id)){
+            updateLike(false);
+        }
+         else{
+            updateLike(true);
+         } 
+     }
+    }
+    },[])
+
+
     useEffect(()=>{
         
       
      if (props.location.state){
 
-         console.log(props.location.state.adId);
+     //    console.log(props.location.state.adId);
         getAdverts({id:props.location.state.adId});
        }
        else if (props.match.params.id){
-        console.log(props.match.params.id);
+     //   console.log(props.match.params.id);
         getAdverts({id:props.match.params.id});
        }
     },[])
@@ -122,7 +146,33 @@ function Detail(props){
     }
     
     const addFavorite=async(adId) =>{
-        await editUser({...user.favorites,adId},user._id,user.token);
+     //   console.log(user.favorites);
+     //   console.log(user);
+        let favorites;
+        let likeState;
+      if (like===true){
+        if (user.favorites){ 
+            favorites={favorites:[...user.favorites,adId]};
+            likeState=false;
+        }
+        else{
+            favorites={favorites:[...[],adId]};
+            likeState=false;
+        }
+      }
+      else{
+        favorites=user.favorites.filter(fav=>
+            fav!==adId
+        );
+        favorites={favorites:favorites};
+        likeState=true;
+    //    console.log(favorites);
+      }
+       
+//        await editUser({...user,favorites:[]},user._id,user.token);
+     await editUser({...user,favorites:favorites.favorites},user._id,user.token);
+  
+updateLike(likeState);
     }
 
    // console.log(props);
@@ -197,10 +247,10 @@ function Detail(props){
                             size="small"
                             color="primary"
                             className="centerButton"
-                            startIcon={<ThumbUpIcon />}
+                            startIcon={like===true? <ThumbUpIcon />:<ThumbDownAlt/>}
                             onClick={()=>addFavorite(ad._id)}
                         >
-                            Like
+                            {like===true?'Like':'Dislike'}
                     </Button> 
                     
                     
