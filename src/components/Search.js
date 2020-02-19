@@ -280,7 +280,7 @@ function Search(props){
               state={ {adId:ad._id}}  >
               <TableCell>
 
-              <img className="img-table" src={"http://localhost:3001/images/" + ad.photo[0]} alt=""></img>
+              <img className="img-table" src={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/images/" + ad.photo[0]} alt=""></img>
             
               </TableCell>
               

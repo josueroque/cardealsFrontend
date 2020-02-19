@@ -269,7 +269,7 @@ function Detail(props){
                
                
                <div className="imgDetail" key={ad._id} className="{classes.root}">
-                  <img className="imgDetail" src={"http://localhost:3001/images/" + actualAd} alt="">
+                  <img className="imgDetail" src={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/images/" + actualAd} alt="">
                   </img>              
                </div>
         
