@@ -111,7 +111,7 @@ export  function  authUserAction  (user) {
          try {
              
             const response=await loginUser(user);
-            console.log(response);
+         //   console.log(response);
 
             if (response.data.ok){
                 user.token=response.data.token;
@@ -120,7 +120,7 @@ export  function  authUserAction  (user) {
                 user._id=response.data._id;
                 user.favorites=response.data.favorites;
                 user.password='';
-                console.log(user);
+              //  console.log(user);
                 dispatch(authUserSuccess(user));
             }
             else {

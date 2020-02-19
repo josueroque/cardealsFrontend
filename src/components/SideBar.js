@@ -194,7 +194,7 @@ export default function Sidebar() {
         {user.token ?    
         <List>
 
-          {['Create ad', 'View list'].map((text, index) => (
+          {['Create ad', 'View list','My favorites'].map((text, index) => (
          <Link key={text} to={ {pathname: `/${text.replace(/\s/g,'')}`}}  className="Link-menu"  >           
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>

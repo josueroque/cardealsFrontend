@@ -113,6 +113,8 @@ function Detail(props){
        }
     },[])
 
+
+
     useEffect(()=>{
        // console.log(ad);
        if(ad){
@@ -172,7 +174,7 @@ function Detail(props){
 //        await editUser({...user,favorites:[]},user._id,user.token);
      await editUser({...user,favorites:favorites.favorites},user._id,user.token);
   
-updateLike(likeState);
+     updateLike(likeState);
     }
 
    // console.log(props);

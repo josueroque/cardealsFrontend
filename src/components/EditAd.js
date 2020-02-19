@@ -109,14 +109,6 @@ function EditAd(props){
        if (ad) updateModel(ad.model );
     },[models])
 
-        // useEffect(()=>{
-        // getModels(make);
-        // if (ad){
-        //   // console.log(ad.model); 
-        //    updateModel(ad.model);
-        // }
-        // },[make])
-
 
     let years=[];
     for (let i=2020;i>1920;i--){

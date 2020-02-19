@@ -8,6 +8,8 @@ import NewAd from './components/NewAd';
 import EditAd from './components/EditAd';
 import Search from './components/Search';
 import Detail from './components/Detail';
+import Favorites from './components/Favorites';
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App  extends Component {
@@ -26,6 +28,7 @@ class App  extends Component {
             <Route exact path='/CreateAd' component={NewAd}  />
             <Route exact path='/Viewlist' component={AdList}  />
             <Route exact path='/Search' component={Search}  />
+            <Route exact path='/Myfavorites' component={Favorites}  />
             <Route exact path='/' component={Home}  />
           </Switch>
           
