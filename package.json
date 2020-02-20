@@ -1,9 +1,6 @@
 {
   "name": "cardeals",
   "version": "0.1.0",
-  "engines": {
-    "node": "10.16.0"
-  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.2",
@@ -30,7 +27,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "npm install -g serve && serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
