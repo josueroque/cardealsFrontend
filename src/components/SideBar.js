@@ -205,20 +205,6 @@ export default function Sidebar() {
         </List>
                   :''
         }
-        <Divider />
-        {user.token ?    
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-              <ListItemText primary={text}/>
-            </ListItem>
-            
-          ))}
-        </List>
-        :''
-        } 
       </Drawer>
       <div>
       <h5>

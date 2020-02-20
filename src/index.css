@@ -26,14 +26,14 @@ margin-left: -30vw !important;
 }
 .DetailField{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.10fr 1fr;
   align-items  :baseline;
   grid-gap: 1vw;
   margin-top: -2vw;
 }
 
 .DetailValue{
-  margin-left: -80%;
+  /* margin-left: -80%; */
   font-size: 1.25em;
   font-style: italic;
 }
@@ -166,7 +166,8 @@ margin-top: 0;
 }
 
 .Container-list{
-  margin-top: 6vw !important;
+  position: relative;
+  margin-top: 3vw !important;
   border-color: #f1f1f1 !important;
   width: 100% !important;
   border: 0px;
@@ -288,6 +289,11 @@ span.psw {
 
 
 @media all and (max-width: 1024px) {
+  .DetailField{
+    display: grid;
+    grid-template-columns: 0.1fr 0.9fr;
+  }
+
   .imgDetail{
     height: 23vw !important;
     width: 30vw !important;
@@ -361,9 +367,12 @@ span.psw {
 }
 /* Change styles for span and cancel button on extra small screens */
 @media all and (max-width: 768px) {
-
+  .DetailField{
+    display: grid;
+    grid-template-columns: 0.25fr 1.90fr;
+  }
 .DetailValue{
-  margin-left: -50%;
+  margin-left: 4vw;
   font-size: 1.25em;
   font-style: italic;
 }
@@ -458,8 +467,12 @@ span.psw {
 }
 
  @media all and (max-width: 480px) {
+  .DetailField{
+    display: grid;
+    grid-template-columns: 0.25fr 1.90fr;
+  }
   .DetailValue{
-    margin-left: -30%;
+    margin-left: 10vw;
     font-size: 1.2em;
     font-style: italic;
   }
