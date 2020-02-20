@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, compose  } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { persistStore, persistReducer,persistCombineReducers } from 'redux-persist';
-import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 const initialState = {};
 
 const middleware = [thunk];
@@ -23,11 +23,25 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 console.log(process.env.NODE_ENV );
+// const store = createStore(
+//     persistedReducer, 
+   
+//     composeEnhancers(applyMiddleware(thunk))
+//  );
+
+
 const store = createStore(
-    persistedReducer, 
-    initialState,
-    composeEnhancers(applyMiddleware(thunk))
- );
+  persistedReducer,
+  initialState,
+  compose(
+    applyMiddleware(
+      thunk,
+    ),
+    process.env.NODE_ENV === 'development'
+      ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      : compose,
+  ),
+);
 
 // Middleware: Redux Persist Persister
 let persistor = persistStore(store);
