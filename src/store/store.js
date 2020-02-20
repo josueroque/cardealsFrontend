@@ -21,27 +21,18 @@ const persistConfig = {
 
 // Middleware: Redux Persist Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 console.log(process.env.NODE_ENV );
 // const store = createStore(
 //     persistedReducer, 
    
 //     composeEnhancers(applyMiddleware(thunk))
 //  );
-
-
-const store = createStore(
-  persistedReducer,
-  initialState,
-  compose(
-    applyMiddleware(
-      thunk,
-    ),
-    process.env.NODE_ENV === 'development'
-      ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-      : compose,
-  ),
-);
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV!=='production' ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose
+const store = createStore(persistedReducer, /* preloadedState, */ composeEnhancers(
+  applyMiddleware(...middleware)
+));
 
 // Middleware: Redux Persist Persister
 let persistor = persistStore(store);
