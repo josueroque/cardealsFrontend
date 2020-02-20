@@ -335,4 +335,4 @@ function NewAd(props){
     )
 }
 
-export default NewAd;
+export default NewAd ;
