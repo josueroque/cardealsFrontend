@@ -314,7 +314,7 @@ function NewAd(props){
             </div>
             
             {afterSave===true ?
-                <div   >
+                <div  >
                     <Alert severity={error===true?'warning':'success'}>{error===true ? 'An error occured, please check your data':'Advert saved succefully!'}</Alert>
 
                 </div>            
@@ -328,7 +328,7 @@ function NewAd(props){
             </FormGroup>   
         </form>
         </Container>  
-         </Fragment>
+         </Fragment >
     }   
        
        </Fragment>
