@@ -21,7 +21,7 @@ const persistConfig = {
 
 // Middleware: Redux Persist Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
+console.log(process.env.NODE_ENV );
 const store = createStore(
     persistedReducer, 
     initialState,
