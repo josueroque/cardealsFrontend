@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, compose  } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { persistStore, persistReducer,persistCombineReducers } from 'redux-persist';
-import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 const initialState = {};
 
 const middleware = [thunk];
@@ -22,23 +22,15 @@ const persistConfig = {
 // Middleware: Redux Persist Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-console.log(process.env.NODE_ENV );
-// const store = createStore(
-//     persistedReducer, 
-   
-//     composeEnhancers(applyMiddleware(thunk))
-//  );
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-
-//const composeEnhancers = process.env.NODE_ENV!=='production' ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose
-const composeEnhancers =  compose;
-
-const store = createStore(persistedReducer, /* preloadedState, */ composeEnhancers(
-  applyMiddleware(...middleware)
-));
+const store = createStore(
+    persistedReducer, 
+    initialState,
+    compose(applyMiddleware(...middleware),
+       // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() 
+       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() || compose 
+) );
 
 // Middleware: Redux Persist Persister
-let persistor = persistStore(store );
+let persistor = persistStore(store);
 
 export  {store,persistor};
