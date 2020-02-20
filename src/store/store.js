@@ -29,12 +29,16 @@ console.log(process.env.NODE_ENV );
 //     composeEnhancers(applyMiddleware(thunk))
 //  );
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const composeEnhancers = process.env.NODE_ENV!=='production' ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose
+
+
+//const composeEnhancers = process.env.NODE_ENV!=='production' ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose
+const composeEnhancers =  compose;
+
 const store = createStore(persistedReducer, /* preloadedState, */ composeEnhancers(
   applyMiddleware(...middleware)
 ));
 
 // Middleware: Redux Persist Persister
-let persistor = persistStore(store);
+let persistor = persistStore(store );
 
 export  {store,persistor};
