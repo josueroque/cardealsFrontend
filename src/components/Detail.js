@@ -241,7 +241,7 @@ function Detail(props){
             </div> 
             <div className="DetailField"> 
                 <h3 className="h3Detail">Description</h3>       
-                <h3 className="h3Detail DetailValue">{ ad? ad.description:''}</h3>        
+                <h3 className="h3Detail DetailValue Description">{ ad? ad.description:''}</h3>        
             </div>                   
             <Grid >    
                     <Button

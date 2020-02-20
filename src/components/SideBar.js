@@ -195,10 +195,10 @@ export default function Sidebar() {
         <List>
 
           {['Create ad', 'View list','My favorites'].map((text, index) => (
-         <Link key={text} to={ {pathname: `/${text.replace(/\s/g,'')}`}}  className="Link-menu"  >           
+         <Link key={text} to={ {pathname: `/${text.replace(/\s/g,'')}`}}  className="Link-menu" >           
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
+              <ListItemText primary={text}/>
             </ListItem>
             </Link>
           ))}
@@ -211,8 +211,8 @@ export default function Sidebar() {
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
           
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
+              <ListItemText primary={text}/>
             </ListItem>
             
           ))}

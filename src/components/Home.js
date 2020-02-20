@@ -40,7 +40,7 @@ function Home(props){
                     
             
                     ads.map(ad=>
-               <Paper>
+               <Paper key={ad._id}>
                <Link className="Link"   to={{
                            pathname: `/detail/${ad._id}` , 
                            state:{  
@@ -51,7 +51,7 @@ function Home(props){
                                                            
                            }}}
                >                   
-               <Card className="column-Ads CardHome" >
+               <Card key={ad._id} className="column-Ads CardHome" >
                    <CardActionArea>
                    <CardMedia
                    className="CardMediaHome"

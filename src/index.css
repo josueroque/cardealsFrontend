@@ -18,6 +18,12 @@ margin-top: 1vw;
   height: 15vw !important;
   width: 18vw !important;
 }
+
+.Description{
+position: relative;
+margin-left: -30vw !important;
+
+}
 .DetailField{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -134,6 +140,8 @@ margin-top: 0;
 }
 
 .Container-Home{
+  position: relative;
+  margin-top: 2vw !important;
   display: grid;
   grid-template-columns: 1fr  ;
   grid-gap: 20px ;
