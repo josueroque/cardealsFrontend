@@ -55,7 +55,7 @@ function Home(props){
                    <CardActionArea>
                    <CardMedia
                    className="CardMediaHome"
-                       image={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com:3000/images/" + ad.photo[0]}
+                       image={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/images/" + ad.photo[0]}
                        title={'See more details'}
                    />
                    <CardContent>
