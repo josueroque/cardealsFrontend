@@ -55,6 +55,7 @@ function EditAd(props){
     const [transmition,updateTransmition]=useState('');
     const [photo,updatePhoto]=useState('');
     const [file,updateFile]=useState( [null]);
+    const [fieldsChanged,updateFieldsChanged]=useState('');
     const [ loading,updateLoading]=useState(false); 
     const [ afterSave,updateAfterSave]=useState(false);
     const dispatch=useDispatch();
@@ -158,8 +159,13 @@ function EditAd(props){
         }
     
     }  
-
+    
    // console.log(props);
+//    const updateChanges=(value)=>{
+//     if (value.id==='amount'){
+//         updateFieldsChanged('amount');
+//     }
+//     }
 
     return(
        <Fragment>
@@ -190,7 +196,7 @@ function EditAd(props){
                       console.log(file);                      
                       updateLoading(true);
 
-                     
+                     let amountChanged=fieldsChanged==='amount'?true:false;
                       let createdAd={
                         make,
                         model,
@@ -202,37 +208,18 @@ function EditAd(props){
                         currency:currency,
                         country:'Honduras',
                         city:'Tergucigalpa',
-                    //    photo:photo,
-              //          user:user.email
+                        amountChanged:amountChanged,
+                        user:user.email
+
                         }
-                      let Ad=new FormData();
-  
-
-
-                    //   for(let i=0 ;i<fileObj[0].length;i++){
-                    //   //  Ad.append('photos',fileObj[0][i]);
-
-                    //   }
-                     // Ad.append('photo',[]);
-                      Ad.append('make',createdAd.make);
-                      Ad.append('model',createdAd.model);
-                      Ad.append('description',createdAd.description);
-                      Ad.append('year',createdAd.year);    
-                      Ad.append('type',createdAd.type);
-                      Ad.append('transmition',createdAd.transmition);
-                      Ad.append('price',createdAd.price);
-                      Ad.append('currency',createdAd.currency);
-                      Ad.append('country',createdAd.country);
-                      Ad.append('city',createdAd.city)
-                  //    Ad.append('user',user.email);
-                  console.log(Ad);
+                
                       editAdvert(createdAd);
                   
                      }
                     }
                    
         >
-        
+
         <h2 className="h2-Ad"> Edit Advert </h2>
 
         <FormGroup>
@@ -331,7 +318,7 @@ function EditAd(props){
                       placeholder="Amount" 
                       id="amount"
                       value={amount}
-                      onChange={e=>updateAmount(e.target.value)}
+                      onChange={(e) => {updateAmount(e.target.value);updateFieldsChanged('amount')}}
                       required
                 />
                 </div>
@@ -344,18 +331,6 @@ function EditAd(props){
                       multiline
                       rows="3"
                 />
-            {/* <input type="file" multiple value={afterSave===false? photo:''} accept="image/*" onChange={e=>updatePhoto(e.target.value)} className="form-control-file" id="photo" aria-describedby="fileHelp"></input>
-            <small id="fileHelp" className="form-text text-muted">Select a photo</small> */}
-            
-            {/* <div className="form-group multi-preview">
-                    {(fileArray || []).map(url => (
-                        <img className="img-preview" key={url} src={url} alt="..." />
-                    ))}
-            </div>
-
-            <div className="form-group">
-                    <input type="file"  accept="image/*" className="form-control" onChange={uploadMultipleFiles} multiple />
-            </div> */}
             
             {afterSave===true ?
                 <div   >

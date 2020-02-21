@@ -2,7 +2,6 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
 import SideBar from './SideBar';
-import MultipleImageUpload from './MultipleImageUpload';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { saveAdAction } from '../store/actions/adsActions';
@@ -13,13 +12,9 @@ import { Button } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import { Snackbar } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import MuiAlert from '@material-ui/lab/Alert';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 
 let fileObj = [];
@@ -105,7 +100,7 @@ function NewAd(props){
         // try {       
             
             updateLoading(true);
-            console.log(fileObj);
+            console.log(advert);
             saveAd(advert,user.token,fileObj);
             await wait(1000);
             updateLoading(false);
@@ -151,11 +146,8 @@ function NewAd(props){
         <form
         onSubmit={e=> {
                       e.preventDefault();
-                      console.log(file);                      
+                                       
                       updateLoading(true);
-                    //   fileObj.map(file=>
-                    //     updatePhoto(...photo, file.name)
-                    //   );
                      
                       let createdAd={
                         make,
@@ -169,14 +161,15 @@ function NewAd(props){
                         country:'Honduras',
                         city:'Tergucigalpa',
                         photo:photo,
-                        user:user.email
+                        user:user.email,
+                        userNickname:user.nickname,
                         }
                       let Ad=new FormData();
 
                       for(let i=0 ;i<fileObj[0].length;i++){
                         Ad.append('photos',fileObj[0][i]);
-
                       }
+
                       Ad.append('photo',[]);
                       Ad.append('make',createdAd.make);
                       Ad.append('model',createdAd.model);
@@ -189,6 +182,8 @@ function NewAd(props){
                       Ad.append('country',createdAd.country);
                       Ad.append('city',createdAd.city)
                       Ad.append('user',user.email);
+                      Ad.append('userNickname',user.nickname);
+                      console.log(Ad);
                       saveNew(Ad);
                   
                      }
@@ -197,7 +192,15 @@ function NewAd(props){
         >
         
         <h2 className="h2-Ad"> New Advert </h2>
+        {afterSave===true ?
+                <div  >
+                    <Alert severity={error===true?'warning':'success'}>{error===true ? 'An error occured, please check your data':'Advert saved succefully!'}</Alert>
 
+                </div>            
+            :
+            ''    
+
+            }
         <FormGroup>
 
             <FormControl className={classes.formControl}> 
@@ -314,10 +317,7 @@ function NewAd(props){
             </div>
             
             {afterSave===true ?
-                <div  >
-                    <Alert severity={error===true?'warning':'success'}>{error===true ? 'An error occured, please check your data':'Advert saved succefully!'}</Alert>
-
-                </div>            
+            ''          
             :
             <Grid container justify="center">
             <Button className="centerButton" type="submit" variant="contained" color="primary">    Save   </Button>

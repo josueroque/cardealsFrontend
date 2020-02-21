@@ -9,6 +9,7 @@ import EditAd from './components/EditAd';
 import Search from './components/Search';
 import Detail from './components/Detail';
 import Favorites from './components/Favorites';
+import UserList from './components/UserList';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -27,6 +28,7 @@ class App  extends Component {
             <Route exact path='/register' component={Register}  />
             <Route exact path='/CreateAd' component={NewAd}  />
             <Route exact path='/Viewlist' component={AdList}  />
+            <Route exact path='/Userlist' component={UserList}  />
             <Route exact path='/Search' component={Search}  />
             <Route exact path='/Myfavorites' component={Favorites}  />
             <Route exact path='/' component={Home}  />

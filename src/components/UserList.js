@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Favorites(props){
+function UserList(props){
     const user =useSelector(state=>state.user.user);
     const [ads,updateAds] =useState([]);
     const allAds=useSelector(state=>state.ads.ads);
@@ -51,10 +51,9 @@ function Favorites(props){
     const editUser=(user,id,token) =>dispatch(editUserAction(user,id,token));
     useEffect(()=>{
       //  console.log(user.email);
-      let favoritesArray=[];
-          if (user.favorites.length>0){
+          if (props.location.state){
        
-          getAdverts({id:user.favorites});
+          getAdverts({user:props.location.state.userEmail});
           } 
           else{
 
@@ -63,22 +62,7 @@ function Favorites(props){
           
     },[])
    
-    useEffect(()=>{
-        console.log('hola de effect');
-        if (user.favorites.length>0){
-       
-          getAdverts({id:user.favorites});
-          } 
-          else{
-
-           getAdverts({id:[1,2]});
-        }
- 
-           
-    },[like])
-    
-
-    const classes = useStyles();
+ const classes = useStyles();
 
     const handleCloseYes = async(e) => {
         try {
@@ -130,7 +114,7 @@ function Favorites(props){
         <SideBar></SideBar>
         <Container className="Favorites-list">
 
-        <h1>My Favorites</h1>
+        <h1>{props.location.state?`Adverts posted by ${props.location.state.userNickname}`:''}</h1>
         
        {allAds ?
         <div className="adsCardsGroup" >
@@ -140,26 +124,24 @@ function Favorites(props){
           allAds.map(ad=>
                
                <div className="column-Ads" key={ad._id}>
-
-               <Card className="column-Ads" className="{classes.root}">
-                   <CardActionArea>
-                   <Link className="h3Detail DetailValue "  to={{
+               <Link className="Link"   to={{
                            pathname: `/detail/${ad._id}` , 
                            state:{  
-                              userEmail:ad.user,
-                              userNickname:ad.userNickname
+                              adId:ad._id,
+                              fromSearch:"False"
                            //   models:models,
                            //   model:ad.model
                                                            
                            }}}
-                    >  
-
+               >                   
+               
+               <Card className="column-Ads" className="{classes.root}">
+                   <CardActionArea>
                    <CardMedia
                    className={classes.media}
                       image={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/images/" + ad.photo[0]}
                        title={ad.make+' '+ad.model}
                    />
-                   </Link>
                    <CardContent>
 
                    <Typography gutterBottom variant="h6" component="h4">
@@ -172,29 +154,9 @@ function Favorites(props){
                    </CardContent>
                    </CardActionArea>
                    <CardActions>
-                    {/* <Dialog id={deleteId} open={true} ></Dialog>  */}
-                   <Grid container justify="center">
-                   <Button  
-                            variant="contained"
-                            size="small"
-                            color="secondary"
-                            className={classes.button}
-                            startIcon={<DeleteIcon />}
-                          
-                            onClick={()=>addFavorite(ad._id)}
-                           >
-                            Remove
-                    
-                    </Button> 
-                    </Grid>                  
-                    {/* <Dialog
-                    id={ad._id}
-                    open={deleteId?true:false}
-                    ></Dialog> */}
-                    
                </CardActions>
                </Card>
-                    
+               </Link>     
            </div>
 
                
@@ -213,4 +175,4 @@ function Favorites(props){
     )
 }
 
-export default Favorites;
+export default UserList;

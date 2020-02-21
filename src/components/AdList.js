@@ -86,6 +86,7 @@ function AdList(props){
      const editAdvert=async(id,advert)=>{
        try {
          //console.log('prueba');
+
          await editAd(advert,id,user.token);
          updateDeleteId(id);
        } catch (error) {

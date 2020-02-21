@@ -1,5 +1,6 @@
 import axios from 'axios';
-const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
+//const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
+const URL='http://localhost:3001/apiv1';
 
 export async function saveUser(user){  
    try {
@@ -171,7 +172,10 @@ export async function getAd(id){
        };
     //console.log(files);  
 
-    
+    for (var pair of ad.entries())
+    {
+     console.log(pair[0]+ ', '+ pair[1]); 
+    }
     const response = await axios.post(requestUrl,ad,config);
     console.log(response);
     return response;   

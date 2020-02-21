@@ -242,7 +242,26 @@ function Detail(props){
             <div className="DetailField"> 
                 <h3 className="h3Detail">Description</h3>       
                 <h3 className="h3Detail DetailValue ">{ ad? ad.description:''}</h3>        
-            </div>                   
+            </div>     
+            <div className="DetailField"> 
+                <h3 className="h3Detail">Posted by</h3>
+               {ad?
+                <Link className="h3Detail DetailValue "  to={{
+                           pathname: `/Userlist` , 
+                           state:{  
+                              userEmail:ad.user,
+                              userNickname:ad.userNickname
+                           //   models:models,
+                           //   model:ad.model
+                                                           
+                           }}}
+                    >  
+                    { ad? ad.userNickname:''}  
+                    </Link>    
+                    :''
+                    }   
+                {/* <h3 className="h3Detail DetailValue ">{ ad? ad.userNickname:''}</h3>         */}
+            </div>                            
             <Grid >    
                     <Button
                             variant="contained"
