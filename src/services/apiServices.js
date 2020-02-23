@@ -1,6 +1,6 @@
 import axios from 'axios';
-const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
-//const URL='http://localhost:3001/apiv1';
+//const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
+const URL='http://localhost:3001/apiv1';
 
 export async function saveUser(user){  
    try {
@@ -28,7 +28,7 @@ export async function loginUser(user){
      const requestUrl =URL +'/authenticate';
 
   const response = await axios.post(requestUrl, user);
-     console.log(response);
+   //  console.log(response);
      if (response.statusText!=="OK") {
        throw new Error('Error saving user');
      }
@@ -177,7 +177,7 @@ export async function getAd(id){
      console.log(pair[0]+ ', '+ pair[1]); 
     }
     const response = await axios.post(requestUrl,ad,config);
-    console.log(response);
+    // console.log(response);
     return response;   
   } catch (error) {
    
@@ -197,7 +197,7 @@ export const  deleteAd= async (id,token) =>{
        }};
     console.log(requestUrl);
     const response = await axios.delete(requestUrl,config);
-    console.log(response);
+    // console.log(response);
     return response;   
   } catch (error) {
    
@@ -215,10 +215,10 @@ export const  editAd= async (ad,id,token) =>{
         'x-access-token': `${token}`,
         // 'Content-Type':'multipart/form-data'},
        }};
-    console.log(requestUrl);
-    console.log(ad);
+    // console.log(requestUrl);
+    // console.log(ad);
     const response = await axios.put(requestUrl,ad,config);
-    console.log(response);
+        //  console.log(response);
     return response;   
   } catch (error) {
    
@@ -236,10 +236,10 @@ export const  editUser= async (user,id,token) =>{
         'x-access-token': `${token}`,
         // 'Content-Type':'multipart/form-data'},
        }};
-    console.log(requestUrl);
-    console.log(user);
+    // console.log(requestUrl);
+    // console.log(user);
     const response = await axios.put(requestUrl,user,config);
-    console.log(response);
+    // console.log(response);
     return response;   
   } catch (error) {
    
@@ -255,11 +255,12 @@ export const deleteUser= async (user,id,token) =>{
        headers: { 
         
         'x-access-token': `${token}`,
+        'email':user.email
         // 'Content-Type':'multipart/form-data'},
        }};
     console.log(requestUrl);
-    console.log(user);
-    const response = await axios.delete(requestUrl,user,config);
+    console.log(user+id+token);
+    const response = await axios.delete(requestUrl,config);
     console.log(response);
     return response;   
   } catch (error) {

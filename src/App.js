@@ -10,6 +10,7 @@ import Search from './components/Search';
 import Detail from './components/Detail';
 import Favorites from './components/Favorites';
 import UserList from './components/UserList';
+import Deactivate from './components/Deactivate';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -31,6 +32,7 @@ class App  extends Component {
             <Route exact path='/Userlist' component={UserList}  />
             <Route exact path='/Search' component={Search}  />
             <Route exact path='/Myfavorites' component={Favorites}  />
+            <Route exact path='/Deactivateaccount' component={Deactivate}  />
             <Route exact path='/' component={Home}  />
           </Switch>
           

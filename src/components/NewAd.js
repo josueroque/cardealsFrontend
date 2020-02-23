@@ -233,7 +233,7 @@ function NewAd(props){
                 </Select>
               </FormControl>
               <FormControl>
-                  <InputLabel id="demo-simple-select-label">Model</InputLabel>              
+                  <InputLabel id="demo-simple-select-label">Type</InputLabel>              
                     <Select  className="form-control"
                     
                     name="type"

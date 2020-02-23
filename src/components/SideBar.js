@@ -182,7 +182,9 @@ export default function Sidebar() {
                                text==='Sign out' && <ExitToApp></ExitToApp> || 
                                text==='Register' && <AssignmentInd></AssignmentInd> ||
                                text==='Search' && <Search></Search> ||
-                               text==='About' && <Info></Info>                               
+                               text==='About' && <Info></Info> 
+                             
+
               } 
               </ListItemIcon>
               <ListItemText primary={text} />
@@ -195,10 +197,10 @@ export default function Sidebar() {
         {user.token ?    
         <List>
 
-          {['Create ad', 'View list','My favorites'].map((text, index) => (
+          {['Create ad', 'View list','My favorites','Deactivate account'].map((text, index) => (
          <Link key={text} to={ {pathname: `/${text.replace(/\s/g,'')}`}}  className="Link-menu" >           
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> :  <ExitToApp/>}</ListItemIcon>
               <ListItemText primary={text}/>
             </ListItem>
             </Link>

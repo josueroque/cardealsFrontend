@@ -128,7 +128,7 @@ export  function  saveUserAction  (user) {
 
          try {
              
-            const response=await deleteUser(user,id,token);
+            const response=await deleteUser(user,user._id,user.token);
             console.log(response);
             dispatch(deleteUserSuccess(user));
                
