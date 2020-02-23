@@ -1,6 +1,6 @@
 import axios from 'axios';
-//const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
-const URL='http://localhost:3001/apiv1';
+const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
+//const URL='http://localhost:3001/apiv1';
 
 export async function saveUser(user){  
    try {
@@ -239,6 +239,27 @@ export const  editUser= async (user,id,token) =>{
     console.log(requestUrl);
     console.log(user);
     const response = await axios.put(requestUrl,user,config);
+    console.log(response);
+    return response;   
+  } catch (error) {
+   
+    throw(error);
+  }
+}
+
+export const deleteUser= async (user,id,token) =>{
+  try {
+    const requestUrl =URL +'/users/'+id;
+
+     const config = {
+       headers: { 
+        
+        'x-access-token': `${token}`,
+        // 'Content-Type':'multipart/form-data'},
+       }};
+    console.log(requestUrl);
+    console.log(user);
+    const response = await axios.delete(requestUrl,user,config);
     console.log(response);
     return response;   
   } catch (error) {

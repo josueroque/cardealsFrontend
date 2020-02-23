@@ -3,13 +3,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import SideBar from './SideBar';
 import {Link} from 'react-router-dom';
 import { getAdsAction } from '../store/actions/adsActions';
-import Carousel from 'react-material-ui-carousel';
-import Paper from '@material-ui/core/Paper';
-import { Button,Container } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import { Button,Container,Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
 function Deactivate(props){
@@ -28,7 +22,9 @@ function Deactivate(props){
         <SideBar></SideBar> 
         <Container className="Deactivate">
         </Container>
-        
+        <Grid container justify="center">
+        <Button className="centerButton" type="submit" variant="contained" color="primary">    Save   </Button>
+        </Grid>
         </Fragment>
 
        

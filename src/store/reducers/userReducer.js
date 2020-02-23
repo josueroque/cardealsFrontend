@@ -15,7 +15,10 @@ import {
     START_VERIFY_NICKNAME,
     START_EDIT_USER,
     EDIT_USER_SUCCESS,
-    EDIT_USER_FAILURE
+    EDIT_USER_FAILURE,
+    START_DELETE_USER,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_FAILURE,
 } from '../types';
 
 import { REHYDRATE } from 'redux-persist';
@@ -24,6 +27,29 @@ const initialState={user:{},loading:false,error:false,errorInfo:''};
 
 export default function (state=initialState,action){
     switch(action.type){
+        case START_DELETE_USER:
+            return{
+                ...state,
+                loading:true,
+                error:false,
+                errorInfo:''
+            } 
+        case DELETE_USER_SUCCESS:
+            return{
+                ...state,
+                user:action.payload,
+                loading:false,
+                error:false,
+            }
+        case DELETE_USER_FAILURE:
+            return{
+                ...state,
+             //   user:{},
+                loading:false,
+                error:true,
+                errorInfo:action.payload
+            }    
+
         case START_EDIT_USER:
             return{
                 ...state,

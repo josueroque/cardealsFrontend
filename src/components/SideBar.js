@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {logoutUserAction} from '../store/actions/userActions';
 import clsx from 'clsx';
@@ -119,6 +119,7 @@ export default function Sidebar() {
         }
   }
   return (
+    <Fragment>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -206,12 +207,13 @@ export default function Sidebar() {
                   :''
         }
       </Drawer>
+
+    </div>
       <div>
       <h5>
-        {user.token? 'Welcome '+ user.name:''}
+        {user.token? 'Welcome '+ user.nickname:''}
       </h5>
     </div>
-    </div>
-
+    </Fragment>
   );
 }

@@ -10,9 +10,28 @@ import {
     START_EDIT_USER,
     EDIT_USER_SUCCESS,
     EDIT_USER_FAILURE,
+    START_DELETE_USER,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_FAILURE
+
 } from '../types';
 
-import {saveUser,loginUser,editUser} from '../../services/apiServices';
+import {saveUser,loginUser,editUser,deleteUser} from '../../services/apiServices';
+
+export const deleteUserSuccess=user=>({
+    type:DELETE_USER_SUCCESS,
+    payload:user
+});
+
+export const startDeleteUser = () => ({
+    type: START_DELETE_USER
+});
+
+export const deleteUserFailure = (error) => ({
+    type: DELETE_USER_FAILURE,
+    payload:error
+});
+
 
 export const editUserSuccess=user=>({
     type:EDIT_USER_SUCCESS,
@@ -102,6 +121,23 @@ export  function  saveUserAction  (user) {
      }
  };
 
+ export  function  deleteUserAction  (user,id,token) {
+    return async (dispatch)=>{
+         dispatch(startDeleteUser());
+         console.log(user);
+
+         try {
+             
+            const response=await deleteUser(user,id,token);
+            console.log(response);
+            dispatch(deleteUserSuccess(user));
+               
+         } catch (error) {
+           //  console.log(typeof(error.data.error));
+             dispatch(deleteUserFailure(error));
+         }
+     }
+ };
 
 export  function  authUserAction  (user) {
     return async (dispatch)=>{

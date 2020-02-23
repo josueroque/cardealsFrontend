@@ -168,7 +168,7 @@ function AdList(props){
                         {popupState => (
                           <React.Fragment>
                             <Button variant="contained"  startIcon={<EditIcon />} size="small" color="default" {...bindTrigger(popupState)}>
-                              SET AS
+                              SET
                             </Button>
                             <Menu {...bindMenu(popupState)}>
                               <MenuItem onClick={() => { popupState.close(); editAdvert(ad._id,{active:false});}}>Sold</MenuItem>
