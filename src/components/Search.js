@@ -1,6 +1,5 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
-import {authUserAction} from '../store/actions/userActions';
 import SideBar from './SideBar';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
 import { getAdsAction } from '../store/actions/adsActions';
@@ -9,12 +8,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import { TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -40,7 +33,6 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-//prueba tabla
 const useStyles1 = makeStyles(theme => ({
     root: {
       flexShrink: 0,
@@ -114,7 +106,6 @@ const useStyles1 = makeStyles(theme => ({
   });
 
 
-//prueba tabla
 function Search(props){
     const classes = useStyles();
     const dispatch=useDispatch();
@@ -147,16 +138,13 @@ function Search(props){
       setPage(0);
     };
 
-//prueba tabla
-
     useEffect(()=>{
         getMakes();
         getAdverts({});
     },[])
     useEffect(()=>{
-         
 
-         getModels(make);
+      getModels(make);
 
      },[make])
     return(
@@ -178,162 +166,134 @@ function Search(props){
                         if(amountFrom && amountTo){ 
                             filter={...filter,amountFrom:amountFrom,amountTo:amountTo }
                         }
-                       console.log(filter);    
                        getAdverts(filter);
                        console.log(ads);
                        }
                       }
-                     
-          
-  
-         >
+          >
          <FormGroup>
-         <FormControl className={classes.formControl}> 
-            <InputLabel id="demo-simple-select-label">Make</InputLabel>       
-                <Select 
-                name="make"
-                onChange={e=>updateMake(e.target.value)}
-                value={make}
-                
-                >
-                    <MenuItem key="default">---Select a make--- </MenuItem>
-                {makes ? makes.map( make=>
-                    <MenuItem key={make.name} value={make.name} >{make.name}</MenuItem>
-                ):''}   
-                </Select>
-         </FormControl>       
-         <FormControl className={classes.formControl}> 
-             <InputLabel id="demo-simple-select-label">Model</InputLabel>              
-        {models.length>0 ?
-                <Select 
-                name="model"
-                onChange={e=>updateModel(e.target.value)}
-                value={model}
-                 
-
-                >
-                    <MenuItem key="default">---Select a model---</MenuItem>
-                {models.length>0 ? models.map( model=>
-                    <MenuItem key={model.name} value={model.name} >{model.name}</MenuItem>
-                ):''}   
-                </Select>
-                :
-                ''
-            }                
-          </FormControl>
-
-          <FormControl className="currencyGroupSearch">
-    
-      
-          <TextField className="amount-Search "
-                      type="number" 
-                      placeholder="Price from" 
-                      id="amount"
-                      value={amountFrom}
-                      onChange={e=>updateAmountFrom(e.target.value)}
-                      
-                />
-            </FormControl>   
-            <FormControl>
-            <TextField className="amount-Search "
-                      type="number" 
-                      placeholder="Price until" 
-                      id="amount"
-                      value={amountTo}
-                      onChange={e=>updateAmountTo(e.target.value)}
-                      
-                />
+          <FormControl className={classes.formControl}> 
+              <InputLabel id="demo-simple-select-label">Make</InputLabel>       
+                  <Select 
+                  name="make"
+                  onChange={e=>updateMake(e.target.value)}
+                  value={make}
+                  
+                  >
+                      <MenuItem key="default">---Select a make--- </MenuItem>
+                  {makes ? makes.map( make=>
+                      <MenuItem key={make.name} value={make.name} >{make.name}</MenuItem>
+                  ):''}   
+                  </Select>
+          </FormControl>       
+          <FormControl className={classes.formControl}> 
+              <InputLabel id="demo-simple-select-label">Model</InputLabel>              
+          {models.length>0 ?
+                  <Select 
+                  name="model"
+                  onChange={e=>updateModel(e.target.value)}
+                  value={model}
+                  >
+                      <MenuItem key="default">---Select a model---</MenuItem>
+                  {models.length>0 ? models.map( model=>
+                      <MenuItem key={model.name} value={model.name} >{model.name}</MenuItem>
+                  ):''}   
+                  </Select>
+                  :
+                  ''
+              }                
             </FormControl>
-            {/* <FormControl>
-          
-            <TextField className="form-control "
-                      placeholder="Description" 
-                      id="description"
-                      value={description}
-                      onChange={e=>updateDescription(e.target.value)}
-                      
-                      multiline
-                      rows="3"
-                />    
-            </FormControl>        */}
 
-         </FormGroup>
-         <Grid container justify="center">
-            <Button className="centerButton" type="submit" variant="contained" color="primary">    Go!   </Button>
-
+            <FormControl className="currencyGroupSearch">
+      
+        
+            <TextField className="amount-Search "
+                        type="number" 
+                        placeholder="Price from" 
+                        id="amount"
+                        value={amountFrom}
+                        onChange={e=>updateAmountFrom(e.target.value)}
+                        
+                  />
+              </FormControl>   
+              <FormControl>
+              <TextField className="amount-Search "
+                        type="number" 
+                        placeholder="Price until" 
+                        id="amount"
+                        value={amountTo}
+                        onChange={e=>updateAmountTo(e.target.value)}
+                        
+                  />
+              </FormControl>
+        </FormGroup>
+          <Grid container justify="center">
+              <Button className="centerButton" type="submit" variant="contained" color="primary">    Go!   </Button>
           </Grid>
          </form>
-
         </Container>
-        
         <Container className="SearchResults">
-        <TableContainer component={Paper}>
-      <Table className={classes2.table} aria-label="custom pagination table">
-        <TableBody>
-          {(ads.length > 0
-            ? ads.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : ads
-          ).map(ad => (
-           
+          <TableContainer component={Paper}>
+            <Table className={classes2.table} aria-label="custom pagination table">
+              <TableBody>
+                {(ads.length > 0
+                  ? ads.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : ads
+                ).map(ad => (
+                
 
-            <TableRow key={ad._id} hover onClick={() => props.history.push('/detail/'+ad._id)} 
-              state={ {adId:ad._id}}  >
-              <TableCell>
+                  <TableRow key={ad._id} hover onClick={() => props.history.push('/detail/'+ad._id)} 
+                    state={ {adId:ad._id}}  >
+                    <TableCell>
 
-              <img className="img-table" src={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/images/" + ad.photo[0]} alt=""></img>
-            
-              </TableCell>
-              
-              <TableCell >
-              {ad.make+' '+ad.model+' '+ad.year}
-              </TableCell>
-              <TableCell >
-              {ad.transmition}
-              </TableCell>
-              <TableCell >
-              {ad.city}
-              </TableCell>
-              <TableCell >
-                {ad.currency} {ad.price}
-              </TableCell>
+                    <img className="img-table" src={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/images/" + ad.photo[0]} alt=""></img>
+                  
+                    </TableCell>
+                    
+                    <TableCell >
+                    {ad.make+' '+ad.model+' '+ad.year}
+                    </TableCell>
+                    <TableCell >
+                    {ad.transmition}
+                    </TableCell>
+                    <TableCell >
+                    {ad.city}
+                    </TableCell>
+                    <TableCell >
+                      {ad.currency} {ad.price}
+                    </TableCell>
 
- 
-    
-             
-              {/* <TableCell align="right"><img ></img></TableCell> */}
-            </TableRow>
+                  </TableRow>
 
-          ))}
+                ))}
 
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 10 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={3}
-              count={ads.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: { 'aria-label': 'rows per page' },
-                native: true,
-              }}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </TableContainer>
-
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 10 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                    colSpan={3}
+                    count={ads.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    SelectProps={{
+                      inputProps: { 'aria-label': 'rows per page' },
+                      native: true,
+                    }}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
         </Container>
-
        </Fragment>
 
        

@@ -1,4 +1,8 @@
 
+.ContainerUserList{
+  margin-top: 3vw !important;
+  width: 100vw !important;
+}
 .Container-Detail{
   margin-top: 5vw !important;
   width: 100vw !important;

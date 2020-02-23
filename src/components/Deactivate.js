@@ -1,12 +1,10 @@
-import React, { Fragment,useEffect,useState } from 'react';
+import React, { Fragment } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import SideBar from './SideBar';
-import {Link} from 'react-router-dom';
 import { getAdsAction } from '../store/actions/adsActions';
 import { Button,Container,Grid } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import {deleteUserAction} from '../store/actions/userActions';
 import {logoutUserAction} from '../store/actions/userActions';
 function Alert(props) {
@@ -23,13 +21,9 @@ function Alert(props) {
   }));
 
 
-
 function Deactivate(props){
     const dispatch=useDispatch();
     const user=useSelector(state=>state.user.user);
-    const error=useSelector(state=>state.user.error);
-    const getAdverts=(user) =>dispatch(getAdsAction(user)); 
-    const ads =useSelector(state=>state.ads.ads);   
     const deleteUser=(user,id,token) =>dispatch(deleteUserAction(user,id,token));
     const logOut=(userRedux) =>dispatch(logoutUserAction(userRedux));
     

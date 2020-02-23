@@ -88,13 +88,10 @@ export const logoutUserSuccess=user=>({
 export  function  saveUserAction  (user) {
     return async (dispatch)=>{
          dispatch(startSaveUser());
-         console.log(user);
-
          try {
              
-            const response=await saveUser(user);
-            console.log(response);
-            //dispatch(saveUserSuccess(user));
+            await saveUser(user);
+            dispatch(saveUserSuccess(user));
                
          } catch (error) {
              console.log(typeof(error.data.error));
@@ -106,16 +103,13 @@ export  function  saveUserAction  (user) {
  export  function  editUserAction  (user,id,token) {
     return async (dispatch)=>{
          dispatch(startEditUser());
-         console.log(user);
 
          try {
              
-            const response=await editUser(user,id,token);
-            console.log(response);
+            await editUser(user,id,token);
             dispatch(editUserSuccess(user));
                
          } catch (error) {
-           //  console.log(typeof(error.data.error));
              dispatch(editUserFailure(error));
          }
      }
@@ -128,12 +122,10 @@ export  function  saveUserAction  (user) {
 
          try {
              
-            const response=await deleteUser(user,user._id,user.token);
-            console.log(response);
+            await deleteUser(user,user._id,user.token);
             dispatch(deleteUserSuccess(user));
                
          } catch (error) {
-           //  console.log(typeof(error.data.error));
              dispatch(deleteUserFailure(error));
          }
      }
@@ -142,13 +134,9 @@ export  function  saveUserAction  (user) {
 export  function  authUserAction  (user) {
     return async (dispatch)=>{
          dispatch(startAuthUser());
-      //   console.log(user);
-
          try {
              
             const response=await loginUser(user);
-         //   console.log(response);
-
             if (response.data.ok){
                 user.token=response.data.token;
                 user.name=response.data.name;
@@ -156,7 +144,6 @@ export  function  authUserAction  (user) {
                 user._id=response.data._id;
                 user.favorites=response.data.favorites;
                 user.password='';
-              //  console.log(user);
                 dispatch(authUserSuccess(user));
             }
             else {
@@ -173,14 +160,11 @@ export  function  authUserAction  (user) {
  export  function  logoutUserAction  (user) {
     return async (dispatch)=>{
          try {
-             
                 user.token=null;
-                console.log(user);
                 dispatch(logoutUserSuccess(user));
                
          } catch (error) {
              console.log(error);
-//             dispatch(authUserFailure());
          }
      }
  };

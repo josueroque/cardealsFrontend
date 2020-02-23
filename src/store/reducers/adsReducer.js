@@ -13,7 +13,6 @@ import {
     EDIT_AD_FAILURE
 } from '../types';
 
-import { REHYDRATE } from 'redux-persist';
 
 const initialState={ads:[],ad:{},loading:false,error:false,errorInfo:''};
 

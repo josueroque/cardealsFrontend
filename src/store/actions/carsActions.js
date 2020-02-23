@@ -9,7 +9,6 @@ import {
 
 import {getMakes,getModels} from '../../services/apiServices';
 
-
 export const getMakesSuccess=makes=>({
     type:GET_MAKES_SUCCESS,
     payload:makes
@@ -49,7 +48,6 @@ export  function  getMakesAction  () {
          try {
              
             const response=await getMakes();
-          //  console.log(response);
             dispatch(getMakesSuccess(response.data.results));
                
          } catch (error) {
@@ -61,15 +59,12 @@ export  function  getMakesAction  () {
 export  function  getModelsAction  (make) {
     return async (dispatch)=>{
          dispatch(startGetModels());
-      //   console.log(user);
-
          try {
              
             const models=await getModels(make);
             
             dispatch(getModelsSuccess(models.data.results));
-            
-            
+           
          } catch (error) {
              console.log(error);
              dispatch(getModelsFailure(error));

@@ -1,12 +1,11 @@
 import axios from 'axios';
-const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
-//const URL='http://localhost:3001/apiv1';
+//const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
+const URL='http://localhost:3001/apiv1';
 
 export async function saveUser(user){  
    try {
      
       const requestUrl =URL +'/authenticate/register';
-      const config = {}
 
    const response = await axios.post(requestUrl, user );
       if (response.statusText!=="OK") {
@@ -28,7 +27,6 @@ export async function loginUser(user){
      const requestUrl =URL +'/authenticate';
 
   const response = await axios.post(requestUrl, user);
-   //  console.log(response);
      if (response.statusText!=="OK") {
        throw new Error('Error saving user');
      }
@@ -46,8 +44,7 @@ export async function getMakes(){
    try {
      
       const requestUrl =URL +'/makes';
-  
-   const response = await axios.get(requestUrl);
+      const response = await axios.get(requestUrl);
       if (response.statusText!=="OK") {
         throw new Error('Error getting makes');
       }
@@ -121,7 +118,7 @@ export async function getMakes(){
       parameterSymbol='&';
 
     }
-    //console.log(requestUrl);
+    
     const response = await axios.get(requestUrl);
  
     if (response.statusText!=="OK") {
@@ -158,27 +155,20 @@ export async function getAd(id){
  export const  saveAd= async (ad,token,files) =>{
   try {
     const requestUrl =URL +'/adverts/create';
-    // console.log('desde api Save ');
-    // console.log(ad);
-    //console.log(requestUrl);
-    //console.log(files);
-    //console.log(ad);
      const config = {
        headers: { 
         
         'x-access-token': `${token}`,
                   'Content-Type':'multipart/form-data'},
-       //files:files           
        };
-    //console.log(files);  
 
     for (var pair of ad.entries())
     {
      console.log(pair[0]+ ', '+ pair[1]); 
     }
     const response = await axios.post(requestUrl,ad,config);
-    // console.log(response);
     return response;   
+
   } catch (error) {
    
     throw(error);
@@ -193,12 +183,12 @@ export const  deleteAd= async (id,token) =>{
        headers: { 
         
         'x-access-token': `${token}`,
-        // 'Content-Type':'multipart/form-data'},
-       }};
-    console.log(requestUrl);
-    const response = await axios.delete(requestUrl,config);
-    // console.log(response);
-    return response;   
+
+      }};
+
+      const response = await axios.delete(requestUrl,config);
+
+      return response;   
   } catch (error) {
    
     throw(error);
@@ -213,13 +203,12 @@ export const  editAd= async (ad,id,token) =>{
        headers: { 
         
         'x-access-token': `${token}`,
-        // 'Content-Type':'multipart/form-data'},
-       }};
-    // console.log(requestUrl);
-    // console.log(ad);
-    const response = await axios.put(requestUrl,ad,config);
-        //  console.log(response);
-    return response;   
+
+      }};
+
+      const response = await axios.put(requestUrl,ad,config);
+
+      return response;   
   } catch (error) {
    
     throw(error);
@@ -234,13 +223,12 @@ export const  editUser= async (user,id,token) =>{
        headers: { 
         
         'x-access-token': `${token}`,
-        // 'Content-Type':'multipart/form-data'},
-       }};
-    // console.log(requestUrl);
-    // console.log(user);
-    const response = await axios.put(requestUrl,user,config);
-    // console.log(response);
-    return response;   
+
+      }};
+
+      const response = await axios.put(requestUrl,user,config);
+
+      return response;   
   } catch (error) {
    
     throw(error);
@@ -256,13 +244,12 @@ export const deleteUser= async (user,id,token) =>{
         
         'x-access-token': `${token}`,
         'email':user.email
-        // 'Content-Type':'multipart/form-data'},
-       }};
-   // console.log(requestUrl);
-   // console.log(user+id+token);
-    const response = await axios.delete(requestUrl,config);
-   // console.log(response);
-    return response;   
+
+      }};
+
+      const response = await axios.delete(requestUrl,config);
+
+      return response;   
   } catch (error) {
    
     throw(error);

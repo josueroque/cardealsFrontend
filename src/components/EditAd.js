@@ -3,7 +3,6 @@ import {useDispatch,useSelector} from 'react-redux';
 import {getMakesAction,getModelsAction} from '../store/actions/carsActions';
 import {getAdsAction} from '../store/actions/adsActions';
 import SideBar from './SideBar';
-import MultipleImageUpload from './MultipleImageUpload';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { editAdAction } from '../store/actions/adsActions';
@@ -14,17 +13,11 @@ import { Button } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import { Snackbar } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import MuiAlert from '@material-ui/lab/Alert';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 
-let fileObj = [];
-let fileArray = [];
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
@@ -53,8 +46,6 @@ function EditAd(props){
     const [amount,updateAmount]=useState('');
     const [description,updateDescription]=useState('');
     const [transmition,updateTransmition]=useState('');
-    const [photo,updatePhoto]=useState('');
-    const [file,updateFile]=useState( [null]);
     const [fieldsChanged,updateFieldsChanged]=useState('');
     const [ loading,updateLoading]=useState(false); 
     const [ afterSave,updateAfterSave]=useState(false);
@@ -66,72 +57,42 @@ function EditAd(props){
    
     useEffect(()=>{
         getMakes();
-      //  getModels(make);
-        fileObj = [];
-        fileArray = [];
-     // console.log (props.location.state.models);
-     //   if (props.location.state){
         if(props.location.state) {
         getAdverts({id:props.location.state.adId});
         }
 
-    //    }
     },[])
 
     useEffect(()=>{
-        updateFile(file );
-    },[file])
-
-    useEffect(()=>{
-       // console.log(ad);
        if(ad){
         updateMake(ad.make);
         getModels(make);
-//        updateModel(ad.model);
         updateYear(ad.year);
         updateTransmition(ad.transmition);
-        //console.log(ad.sell);
-        if (ad.sell===true) updateType('Sell') ;
-        else updateType('Buy'); 
+            if  (ad.sell===true) updateType('Sell') ;
+            else updateType('Buy'); 
         updateAmount(ad.price);
         updateCurrency(ad.currency);
         updateDescription(ad.description);
-        updatePhoto(ad.photo);
      }
     },[ad])
 
-    useEffect(()=>{
-        updateFile(file );
-    },[file])
 
     useEffect(()=>{
-        console.log(models);
-      if(ad)  console.log(ad.model);
        if (ad) updateModel(ad.model );
     },[models])
-
 
     let years=[];
     for (let i=2020;i>1920;i--){
         years.push(i);
     }
     
-    
     const override = css`
     display: block;
     margin: 0 auto;
     border-color: red;
     `;
-    
-   const uploadMultipleFiles=(e)=> {
- //  console.log(e.target);
-        fileObj.push(e.target.files);
-        for (let i = 0; i < fileObj[0].length; i++) {
-            fileArray.push(URL.createObjectURL(fileObj[0][i]));
-        }
-        updateFile(fileArray );
-    }
-    
+
     const wait=async(ms)=> {
         return new Promise(resolve => {
         setTimeout(resolve, ms);
@@ -142,7 +103,6 @@ function EditAd(props){
          try {       
             
             updateLoading(true);
-            console.log(advert);
             editAd(advert,props.location.state.adId,user.token);
             await wait(1000);
             updateLoading(false);
@@ -152,7 +112,6 @@ function EditAd(props){
   
         }
        
-    
         catch (error) {
             console.log(loading);
             console.log(error);
@@ -160,13 +119,6 @@ function EditAd(props){
     
     }  
     
-   // console.log(props);
-//    const updateChanges=(value)=>{
-//     if (value.id==='amount'){
-//         updateFieldsChanged('amount');
-//     }
-//     }
-
     return(
        <Fragment>
         <SideBar></SideBar>            
@@ -193,7 +145,6 @@ function EditAd(props){
         <form
         onSubmit={e=> {
                       e.preventDefault();
-                      console.log(file);                      
                       updateLoading(true);
 
                      let amountChanged=fieldsChanged==='amount'?true:false;

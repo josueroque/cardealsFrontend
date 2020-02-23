@@ -75,12 +75,10 @@ export const getAdsFailure = (error) => ({
 export  function  saveAdAction  (ad,token,files) {
     return async (dispatch)=>{
          dispatch(startSaveAd());
-         console.log(ad);
 
          try {
              
-            const response=await saveAd(ad,token,files);
-            console.log(response);
+            await saveAd(ad,token,files);
             dispatch(saveAdSuccess(ad));
                
          } catch (error) {
@@ -96,7 +94,6 @@ export  function  saveAdAction  (ad,token,files) {
          dispatch(startEditAd());
 
          try {
-             console.log(ad);
             const response=await editAd(ad,id,token);
             dispatch(editAdSuccess(response.data.results));
                
@@ -112,8 +109,7 @@ export  function  saveAdAction  (ad,token,files) {
          dispatch(startDeleteAd());
 
          try {
-             console.log(id);
-            const response=await deleteAd(id,token);
+            await deleteAd(id,token);
             dispatch(deleteAdSuccess(id));
                
          } catch (error) {
@@ -128,27 +124,21 @@ export  function  saveAdAction  (ad,token,files) {
          dispatch(startGetAds());
 
          try {
-//            console.log(filter);
 
-          //  console.log(filter); 
             if (filter.user||!filter.id){
             const response=await getAdsUser(filter);
-          //  console.log(response);
             dispatch(getAdsSuccess(response.data.results));
-    //        console.log(response);
 
             } 
 
             if (filter.id){
                 const response=await getAd(filter.id);
-                console.log(response);
                 dispatch(getAdsSuccess(response.data.results));
     
             }    
 
                
          } catch (error) {
-             console.log(error);
              dispatch(getAdsFailure(error));
          }
      }

@@ -101,23 +101,7 @@ export default function Sidebar() {
     setOpen(false);
   };
 
-  const selectIcon=(action)=>{
-
-        switch  (action){
-            case 'Sign in': 
-                return '<LockOpen />';
-            case 'Register': 
-                return '<AssignmentInd />';
-            case 'Search':
-                return '<Search />';
-            case 'About':
-                return '<Info />';
-            case 'Sign out':
-                return '<ExitToApp />';
-            default: 
-                return '';    
-        }
-  }
+  
   return (
     <Fragment>
     <div className={classes.root}>
@@ -128,14 +112,9 @@ export default function Sidebar() {
           [classes.appBarShift]: open,
         })}
       >
-   
-
-         
+           
         <Toolbar>
-
-         
-
-          <IconButton
+            <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}

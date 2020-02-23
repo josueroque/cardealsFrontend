@@ -7,7 +7,6 @@ import {
      GET_MODELS_FAILURE,
 } from '../types';
 
-import { REHYDRATE } from 'redux-persist';
 
 const initialState={makes:[],models:[],loading:false,error:false,errorInfo:''};
 

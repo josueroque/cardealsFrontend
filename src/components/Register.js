@@ -2,7 +2,6 @@ import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {saveUserAction} from '../store/actions/userActions';
 import SideBar from'./SideBar';
-import Login from './Login';
 import { ClipLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { Container } from '@material-ui/core';
@@ -11,9 +10,6 @@ import { FormGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import { Snackbar } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import MuiAlert from '@material-ui/lab/Alert';
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -35,23 +31,18 @@ function Register(props){
     const [ afterSave,updateAfterSave]=useState(false);
     const [internalError,updateInternalError]=useState('');
     const dispatch=useDispatch();
-    const user=useSelector(state=>state.user);
     const error=useSelector(state=>state.user.error);
     const errorInfo=useSelector(state=>state.user.errorInfo);
-    const [messageHandler,updateHandler]=useState({});
     const [name,updateName] =useState('');
     const [nickname,updateNickname] =useState('');
     const [email,updateEmail] =useState('');
     const [password,updatePassword] =useState('');
-    const [open, setOpen] = React.useState(false);
     const [passwordConfirmation,updatePasswordConfirmation] =useState('');
     const saveUser=(newUser) =>dispatch(saveUserAction(newUser));
-    const classes = useStyles();
 
     useEffect(()=>{
         if (error===true && errorInfo){
             let err=errorInfo.substring(0,76);
-            console.log(err) 
            switch (err){
             case 'E11000 duplicate key error collection: Cardeals.users index: nickname_1 dup ':
                 updateInternalError('Nickname already exists!')
@@ -91,9 +82,6 @@ function Register(props){
             await wait(1000);
             updateLoading(false);
   
-            // await wait(2000);
-            // updateAfterSave(false);
-            // props.history.push("/login");
 
         }
        
@@ -156,9 +144,7 @@ function Register(props){
                                         
                                                                 
                         <FormGroup>
-                            {/* <label for="exampleInputEmail1">Email address</label> */}
                             <TextField type="text"
-//                                className="form-control"
                                 id="name" 
                                 placeholder="Type your name" 
                                 onChange={e=>updateName(e.target.value)}
