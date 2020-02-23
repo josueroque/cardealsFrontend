@@ -211,11 +211,11 @@ export default function Sidebar() {
       </Drawer>
 
     </div>
-      <div>
+     
       <h5>
         {user.token? 'Welcome '+ user.nickname:''}
       </h5>
-    </div>
+   
     </Fragment>
   );
 }
