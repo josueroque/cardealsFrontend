@@ -132,7 +132,7 @@ export default function Sidebar() {
         
          {/* <Button color="inherit" className="RightMenu">Sign in</Button> 
          <Button color="inherit" >Register</Button> */}
-         <Link to={ {pathname: `/Search`}} className="Link" >           
+         <Link to={ {pathname: `/Search`}} className="Link RightMenu" >           
             <Button color="inherit" >Search</Button> 
          </Link>
         </Toolbar>
