@@ -153,7 +153,7 @@ export default function Sidebar() {
         </div>
         <Divider />
         <List>
-          {[`${!user.token ? 'Sign in':'Sign out'}`, 'Register', 'Search', 'About'].map((text, index) => (
+          {/* {[`${!user.token ? 'Sign in':'Sign out'}`, 'Register', 'Search', 'About'].map((text, index) => (
           
           <Link key ={text} to={ {pathname: `/${text.replace(/\s/g,'')}`}}  className="Link-menu"  onClick={text==='Sign out' ?  ()=>logOut(user) :()=>{}}>  
            <ListItem button  >
@@ -169,7 +169,39 @@ export default function Sidebar() {
               <ListItemText primary={text} />
             </ListItem>
              </Link> 
-          ))}
+          ))} */}
+
+       {user.token ? 
+         <Fragment>
+         <Link key ={'Login'} to={user.token? {pathname: `/Login`}:{pathname: `/Logout`}}  className="Link-menu"  onClick={user.token ?  ()=>logOut(user) :()=>{}}>  
+            <ListItem button  >
+                <ListItemIcon>
+                  <LockOpen />
+                </ListItemIcon>
+                <ListItemText primary={!user.token ? 'Login':'Logout'} />
+            </ListItem>
+          </Link>
+          <Link key ={'Register'} to={{pathname: `/Register`}}  className="Link-menu">    
+            <ListItem button  >
+              <ListItemIcon>
+                <AssignmentInd />
+              </ListItemIcon>
+              <ListItemText primary='Register' />
+            </ListItem>
+         </Link>
+         <Link key ={'Search'} to={{pathname: `/Search`}}  className="Link-menu">    
+            <ListItem button  >
+              <ListItemIcon>
+                <Search />
+              </ListItemIcon>
+              <ListItemText primary='Search' />
+            </ListItem>
+         </Link> 
+
+         </Fragment>
+          : ''
+          }
+
         </List>
         
         <Divider />
@@ -191,9 +223,9 @@ export default function Sidebar() {
 
     </div>
      
-      <h5>
+      <h4>
         {user.token? 'Welcome '+ user.nickname:''}
-      </h5>
+      </h4>
    
     </Fragment>
   );

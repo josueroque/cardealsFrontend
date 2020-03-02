@@ -17,7 +17,7 @@ function Home(props){
     const dispatch=useDispatch();
     const user=useSelector(state=>state.user.user);
     const getAdverts=(user) =>dispatch(getAdsAction(user)); 
-    const ads =useSelector(state=>state.ads.ads);   
+    const ads =useSelector(state=>state.ads.ads); 
     useEffect(()=>{
         getAdverts({user:user.email,limit:5})
     },[])
@@ -29,7 +29,7 @@ function Home(props){
         <Container className="Container-Home">
         <Container className="Container-Carousel">
             <h1>
-                Lastest adverts added
+                Latest adverts added
             </h1>
         <Carousel autoplay>
             { ads.length>0  ?
