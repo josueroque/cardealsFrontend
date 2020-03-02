@@ -126,12 +126,12 @@ export default function Sidebar() {
           </IconButton>
           <Link to={ {pathname: `/`}} className="Link" >  
           <Typography variant="h6" noWrap>
-            Cardeals
+            Carsdeals
           </Typography>
           </Link>
         
-         <Button color="inherit" className="RightMenu">Sign in</Button> 
-         <Button color="inherit" >Register</Button>
+         {/* <Button color="inherit" className="RightMenu">Sign in</Button> 
+         <Button color="inherit" >Register</Button> */}
          <Link to={ {pathname: `/Search`}} className="Link" >           
             <Button color="inherit" >Search</Button> 
          </Link>
@@ -171,8 +171,8 @@ export default function Sidebar() {
              </Link> 
           ))} */}
 
-       {user.token ? 
-         <Fragment>
+  
+         
          <Link key ={'Login'} to={user.token? {pathname: `/Login`}:{pathname: `/Logout`}}  className="Link-menu"  onClick={user.token ?  ()=>logOut(user) :()=>{}}>  
             <ListItem button  >
                 <ListItemIcon>
@@ -198,9 +198,8 @@ export default function Sidebar() {
             </ListItem>
          </Link> 
 
-         </Fragment>
-          : ''
-          }
+        
+
 
         </List>
         
