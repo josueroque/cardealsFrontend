@@ -12,11 +12,46 @@ import {
     EDIT_USER_FAILURE,
     START_DELETE_USER,
     DELETE_USER_SUCCESS,
-    DELETE_USER_FAILURE
+    DELETE_USER_FAILURE,
+    START_RESET_REQUEST,
+    RESET_REQUEST_SUCCESS,
+    RESET_REQUEST_FAILURE,
+    START_RESET_PASSWORD,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAILURE
+
 
 } from '../types';
 
-import {saveUser,loginUser,editUser,deleteUser} from '../../services/apiServices';
+import {saveUser,loginUser,editUser,deleteUser,saveRequest,resetPassword} from '../../services/apiServices';
+
+export const resetPasswordSuccess=request=>({
+    type:RESET_PASSWORD_SUCCESS,
+    payload:request
+});
+
+export const startResetPassword = () => ({
+    type: START_RESET_PASSWORD
+});
+
+export const resetPasswordFailure = (error) => ({
+    type: RESET_PASSWORD_FAILURE,
+    payload:error
+});
+
+export const resetRequestSuccess=request=>({
+    type:RESET_REQUEST_SUCCESS,
+    payload:request
+});
+
+export const startResetRequest = () => ({
+    type: START_RESET_REQUEST
+});
+
+export const resetRequestFailure = (error) => ({
+    type: RESET_REQUEST_FAILURE,
+    payload:error
+});
 
 export const deleteUserSuccess=user=>({
     type:DELETE_USER_SUCCESS,
@@ -165,6 +200,34 @@ export  function  authUserAction  (user) {
                
          } catch (error) {
              console.log(error);
+         }
+     }
+ };
+
+ export  function  saveRequestAction  (request) {
+    return async (dispatch)=>{
+         dispatch(startResetRequest());
+         try {
+             
+          await saveRequest (request);
+          dispatch(resetRequestSuccess(request));
+               
+         } catch (error) {
+             dispatch(resetRequestFailure(error));
+         }
+     }
+ };
+
+ export  function  resetPasswordAction  (request) {
+    return async (dispatch)=>{
+         dispatch(startResetPassword());
+         try {
+             
+          await resetPassword (request);
+          dispatch(resetPasswordSuccess(request));
+               
+         } catch (error) {
+             dispatch(resetPasswordFailure(error));
          }
      }
  };

@@ -1,13 +1,12 @@
 import axios from 'axios';
-const URL='http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/apiv1';
-//const URL='http://localhost:3001/apiv1';
+const URL='http://ec2-3-15-65-154.us-east-2.compute.amazonaws.com/apiv1';
+//export const URL='http://localhost:3001/apiv1';
 
 export async function saveUser(user){  
    try {
-     
+        
       const requestUrl =URL +'/authenticate/register';
-
-   const response = await axios.post(requestUrl, user );
+      const response = await axios.post(requestUrl, user );
       if (response.statusText!=="OK") {
         throw new Error('Error saving user');
       }
@@ -250,6 +249,34 @@ export const deleteUser= async (user,id,token) =>{
       const response = await axios.delete(requestUrl,config);
 
       return response;   
+  } catch (error) {
+   
+    throw(error);
+  }
+}
+
+export const  saveRequest= async (request) =>{
+  try {
+    const requestUrl =URL +'/authenticate/forgot';
+
+    const response = await axios.post(requestUrl,request);
+
+    return response;   
+
+  } catch (error) {
+   
+    throw(error);
+  }
+}
+
+export const  resetPassword= async (request) =>{
+  try {
+    const requestUrl =URL +'/authenticate/reset';
+
+    const response = await axios.post(requestUrl,request);
+
+    return response;   
+
   } catch (error) {
    
     throw(error);

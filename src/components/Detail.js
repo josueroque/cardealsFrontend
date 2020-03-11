@@ -192,7 +192,7 @@ function Detail(props){
                 { ad.photo.length>0  ?
                 ad.photo.map(actualAd=>
                     <div className="imgDetail" key={ad._id} className="{classes.root}">
-                        <img className="imgDetail" src={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/images/" + actualAd} alt="">
+                        <img className="imgDetail" src={"http://ec2-3-15-65-154.us-east-2.compute.amazonaws.com/images/" + actualAd} alt="">
                         </img>              
                     </div>
                 )

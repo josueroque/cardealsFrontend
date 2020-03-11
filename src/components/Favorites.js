@@ -121,7 +121,7 @@ function Favorites(props){
 
                    <CardMedia
                    className={classes.media}
-                      image={"http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/images/" + ad.photo[0]}
+                      image={"http://ec2-3-15-65-154.us-east-2.compute.amazonaws.com/images/" + ad.photo[0]}
                        title={ad.make+' '+ad.model}
                    />
                    </Link>

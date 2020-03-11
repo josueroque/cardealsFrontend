@@ -12,13 +12,65 @@ import {
     START_DELETE_USER,
     DELETE_USER_SUCCESS,
     DELETE_USER_FAILURE,
-} from '../types';
+    START_RESET_REQUEST,
+    RESET_REQUEST_SUCCESS,
+    RESET_REQUEST_FAILURE,
+    START_RESET_PASSWORD,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAILURE
+
+    } from '../types';
 
 
 const initialState={user:{},loading:false,error:false,errorInfo:''};
 
 export default function (state=initialState,action){
     switch(action.type){
+        case START_RESET_PASSWORD:
+            return{
+                ...state,
+                loading:true,
+                error:false,
+                errorInfo:''
+            } 
+        case RESET_PASSWORD_SUCCESS:
+            return{
+                ...state,
+               // user:action.payload,
+                loading:false,
+                error:false,
+            }
+        case RESET_PASSWORD_FAILURE:
+            return{
+                ...state,
+             //   user:{},
+                loading:false,
+                error:true,
+                errorInfo:action.payload
+            }    
+
+        case START_RESET_REQUEST:
+            return{
+                ...state,
+                loading:true,
+                error:false,
+                errorInfo:''
+            } 
+        case RESET_REQUEST_SUCCESS:
+            return{
+                ...state,
+               // user:action.payload,
+                loading:false,
+                error:false,
+            }
+        case RESET_REQUEST_FAILURE:
+            return{
+                ...state,
+             //   user:{},
+                loading:false,
+                error:true,
+                errorInfo:action.payload
+            }    
         case START_DELETE_USER:
             return{
                 ...state,

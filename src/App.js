@@ -11,6 +11,8 @@ import Detail from './components/Detail';
 import Favorites from './components/Favorites';
 import UserList from './components/UserList';
 import Deactivate from './components/Deactivate';
+import ResetRequest from './components/ResetRequest';
+import ResetPassword from './components/ResetPassword';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
@@ -25,8 +27,10 @@ class App  extends Component {
 
             <Route exact path='/edit/:id' component={EditAd}  />
             <Route exact path='/detail/:id' component={Detail}  />
+            <Route exact path='/ResetPassword/:id' component={ResetPassword}  />
             <Route exact path='/Login' component={Login}  />
             <Route exact path='/Logout' component={Login}  />
+            <Route exact path='/Reset' component={ResetRequest}  />
             <Route exact path='/register' component={Register}  />
             <Route exact path='/CreateAd' component={NewAd}  />
             <Route exact path='/Viewlist' component={AdList}  />
