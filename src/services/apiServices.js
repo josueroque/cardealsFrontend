@@ -1,6 +1,6 @@
 import axios from 'axios';
-const URL='http://ec2-3-15-65-154.us-east-2.compute.amazonaws.com/apiv1';
-//export const URL='http://localhost:3001/apiv1';
+//const URL='http://ec2-3-15-65-154.us-east-2.compute.amazonaws.com/apiv1';
+export const URL='http://localhost:3001/apiv1';
 
 export async function saveUser(user){  
    try {
@@ -273,7 +273,7 @@ export const  resetPassword= async (request) =>{
   try {
     const requestUrl =URL +'/authenticate/reset';
 
-    const response = await axios.post(requestUrl,request);
+    const response = await axios.put(requestUrl,request);
 
     return response;   
 
