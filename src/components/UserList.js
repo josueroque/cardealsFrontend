@@ -73,7 +73,7 @@ function UserList(props){
                    <CardActionArea>
                    <CardMedia
                    className={classes.media}
-                      image={"http://ec2-3-15-65-154.us-east-2.compute.amazonaws.com/images/" + ad.photo[0]}
+                      image={"https://carsdealshn.josueroque.com/images/" + ad.photo[0]}
                        title={ad.make+' '+ad.model}
                    />
                    <CardContent>
