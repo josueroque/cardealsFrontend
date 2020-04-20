@@ -1,5 +1,6 @@
 import React, { Fragment,useEffect,useState } from 'react';
 import {useDispatch,useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {authUserAction} from '../store/actions/userActions';
 import { Container } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
@@ -83,6 +84,13 @@ function Login(props){
                 <Grid container justify="center">
                     <Button className="centerButton" type="submit" variant="contained" color="primary">     Enter    </Button>
                 </Grid>
+                <Grid container justify="flex-end">
+                     <Link   to={{
+                            pathname: `/Reset`  
+                            }}
+                      > Forgot your password? </Link>         
+                </Grid>
+
                 <br />
                     { error===true && email && password ?         
                                                                                  
